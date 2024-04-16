@@ -1,6 +1,7 @@
-import javax.swing.*;
+package games;
 
-public class App {
+import javax.swing.JFrame;
+public class App extends JFrame {
     public static void main(String[] args) throws Exception {
         int boardWidth = 600;
         int boardHeight = boardWidth;

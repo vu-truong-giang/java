@@ -1,3 +1,5 @@
+package games;
+
 import java.awt.*;
 
 
@@ -26,21 +28,9 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener {
     Container cn;
     Timer timer;
     
+       
     
-//    public SnakeGame(String s, int k) {
-//    	timer = new Timer(speed[k], new ActionListener() {
-//			
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				// TODO Auto-generated method stub
-//				moveBody();
-//				
-//			}
-//		});
-//    }
-//    
-    
-    SnakeGame(int boardWidth, int boardHeight) {
+    public SnakeGame(int boardWidth, int boardHeight) {
         this.boardWidth = boardWidth;
         this.boardHeight = boardHeight;
         setPreferredSize(new Dimension(this.boardWidth, this.boardHeight));
@@ -59,7 +49,7 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener {
 		gameLoop = new Timer(level.getCurrentLevel(),this); 
         gameLoop.start();
         
-        JButton level_bt = new JButton("Level"+ (level.getCurrentLevel()));
+        JButton level_bt = new JButton("Level "+ (level.getCurrentLevel()));
         level_bt.addActionListener(new ActionListener() {
 			
 			@Override
@@ -67,7 +57,7 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener {
 				// TODO Auto-generated method stub
 				level.nextLevel();
 				gameLoop.setDelay(level.getCurrentSpeed());
-				level_bt.setText("Level" + (level.getCurrentLevel()));
+				level_bt.setText("Level " + (level.getCurrentLevel()));
 			}
 		});
         JPanel level_pn = new JPanel();
@@ -102,7 +92,8 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener {
         
        
 	}	
-    int[] soreMu = {1,2,3,4,5};
+    
+	int[] soreMu = {1,2,3,4,5};
     int currentLevel = 0;
     int currentScore =0;
     
@@ -291,4 +282,6 @@ private String calculateScore() {
 
     @Override
     public void keyReleased(KeyEvent e) {}
+    
+//    
 }
