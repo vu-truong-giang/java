@@ -1,119 +1,82 @@
 package LogIn;
-
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.GridLayout;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
-import javax.swing.SwingUtilities;
+public class LoginForm extends JFrame {
 
-public class LoginForm extends JFrame implements ActionListener {
-    private JTextField userField;
-    private JPasswordField passField;
-    private JCheckBox rememberCheckBox;
-    private JButton loginButton;
-    private JButton signupButton;
-    
+    private JTextField usernameField;
+    private JPasswordField passwordField;
+
     public LoginForm() {
-    	setTitle("Login Form");
-    	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    	setSize(500,400);
-    	setLocationRelativeTo(null);
-    	
-    	
-    	setLayout(new GridLayout(4, 1, 10,10));
-    	
-    	Font font = new Font("Arial", Font.BOLD, 15);
-    	JPanel userPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-    	JLabel userLabel = new JLabel("Username:");
-    	userLabel.setFont(font);
-    	userField = new JTextField(20);
-    	userField.setFont(font);
-    	userPanel.add(userLabel);
-    	userPanel.add(userField);
-    	
-    	JPanel passPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-    	JLabel passLabel = new JLabel("Password:");
-    	passLabel.setFont(font);
-    	passField = new JPasswordField(20);
-    	passField.setFont(font);
-    	passPanel.add(passLabel);
-    	passPanel.add(passField);
-    	
-    	JPanel rememberPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-    	rememberCheckBox = new JCheckBox(" Remember Password");
-    	rememberPanel.add(rememberCheckBox);
-    	
-    	JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-    	loginButton = new JButton("Log In");
-    	loginButton.setFont(font);
-    	loginButton.addActionListener(this);
-    	panel.add(loginButton);
-    	
-    	signupButton = new JButton("Sign Up");
-    	signupButton.setFont(font);
-    	signupButton.addActionListener(this);
-    	panel.add(signupButton);
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-    	add(userPanel);
-    	add(passPanel);
-    	add(rememberPanel);
-    	add(panel);
-    	pack();
-    	setVisible(true);
-    	
+        setTitle("Đăng nhập");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(300, 150);
+        setLocationRelativeTo(null);
+
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridBagLayout()); // Sử dụng GridBagLayout
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.anchor = GridBagConstraints.WEST; // Đặt cố định thành trái
+
+        JLabel usernameLabel = new JLabel("Tên đăng nhập:");
+        gbc.gridx = 0; // Cột 0
+        gbc.gridy = 0; // Dòng 0
+        gbc.gridwidth = 1; // Số cột chiếm dụng
+        gbc.insets = new Insets(5,5,5,5); // Khoảng cách giữa các thành phần
+        panel.add(usernameLabel, gbc);
+
+        usernameField = new JTextField(15);
+        gbc.gridx = 1; // Cột 1
+        gbc.gridy = 0; // Dòng 0
+        gbc.gridwidth = 2; // Số cột chiếm dụng
+        panel.add(usernameField, gbc);
+
+        JLabel passwordLabel = new JLabel("Mật khẩu:");
+        gbc.gridx = 0; // Cột 0
+        gbc.gridy = 1; // Dòng 1
+        gbc.gridwidth = 1; // Số cột chiếm dụng
+        panel.add(passwordLabel, gbc);
+
+        passwordField = new JPasswordField(15);
+        gbc.gridx = 1; // Cột 1
+        gbc.gridy = 1; // Dòng 1
+        gbc.gridwidth = 2; // Số cột chiếm dụng
+        panel.add(passwordField, gbc);
+
+        JButton loginButton = new JButton("Đăng nhập");
+        gbc.gridx = 1; // Cột 1
+        gbc.gridy = 2; // Dòng 2
+        gbc.gridwidth = 2; // Số cột chiếm dụng
+        gbc.anchor = GridBagConstraints.CENTER; // Đặt cố định vào giữa
+        panel.add(loginButton, gbc);
+
+        loginButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String username = usernameField.getText();
+                String password = String.valueOf(passwordField.getPassword());
+                // Kiểm tra tên đăng nhập và mật khẩu ở đây
+                if(username.equals("admin") && password.equals("123")) {
+                	JOptionPane.showMessageDialog(null , "Đăng nhập thành công");
+                } else {
+                	JOptionPane.showMessageDialog(null, "Tên đang nhập hoặc mật khẩu không đúng!");
+                }
+            }
+        });
+
+        getContentPane().add(panel);
+        setVisible(true);
     }
-	
-	
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
-		String user = userField.getText();
-		String pass = new String(passField.getPassword());
-		
-		// kiểm tra tên và mk
-		if(user.equals("admin") && pass.equals("admin")) {
-			if(rememberCheckBox.isSelected()) {
-				JOptionPane.showMessageDialog(this, "Login successful! Remember password:"+pass);
-				
-			} else {
-				JOptionPane.showMessageDialog(this, "Login successful!" );
-			}
-		} else {
-			JOptionPane.showMessageDialog(this,"Invalid username or password. Please try again." );
-		}
-	}
-	public static void main(String[] args) {
-		SwingUtilities.invokeLater(new Runnable() {
-			
-			@Override
-			public void run() {
-				// TODO Auto-generated method stub
-				new LoginForm();
-			}
-		});
-	}
-	
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new LoginForm();
+            }
+        });
+    }
 }
-
-

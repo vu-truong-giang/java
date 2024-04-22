@@ -1,86 +1,57 @@
 package LogIn;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.GridLayout;
-import java.awt.HeadlessException;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import javax.swing.*;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-
-public class LogIn extends JFrame implements ActionListener {
-    private JTextField user;
-    private JTextField pass;
-    private JButton logIn;
-    private JButton signUp;
-
-    public LogIn() throws HeadlessException {
-        this.init();
-        this.setVisible(true);
-    }
-
-    public void init() {
-        this.setTitle("Log In");
-        this.setSize(500, 400);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setLocationRelativeTo(null);
-
-        Font font = new Font("Arial", Font.BOLD, 20);
-
-        JLabel jLabel_user = new JLabel("User");
-        jLabel_user.setFont(font);
-        JLabel jLabel_pass = new JLabel("Password");
-        jLabel_pass.setFont(font);
-
-        user = new JTextField(15);
-        user.setFont(font);
-        pass = new JTextField(15);
-        pass.setFont(font);
-
-        JPanel jPanel = new JPanel();
-        jPanel.setLayout(new GridLayout(2, 2, 200, 100));
-        jPanel.add(jLabel_user);
-        jPanel.add(user);
-        jPanel.add(jLabel_pass);
-        jPanel.add(pass);
-
-        logIn = new JButton("Log In");
-        logIn.addActionListener(this);
-        logIn.setFont(font);
-        logIn.setBackground(Color.WHITE);
-
-        signUp = new JButton("Sign Up");
-        signUp.addActionListener(this);
-        signUp.setFont(font);
-        signUp.setBackground(Color.WHITE);
-
-        JPanel jPanel2 = new JPanel();
-        jPanel2.setLayout(new GridLayout(1, 2, 50, 50));
-        jPanel2.add(logIn);
-        jPanel2.add(signUp);
-
-        JPanel mainPanel = new JPanel(new BorderLayout());
-        mainPanel.add(jPanel, BorderLayout.CENTER);
-        mainPanel.add(jPanel2, BorderLayout.SOUTH);
-
-        this.getContentPane().setBackground(Color.LIGHT_GRAY);
-        this.add(mainPanel);
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        // Xử lý sự kiện khi nhấn nút Log In hoặc Sign Up
-        // Cần thêm mã xử lý sau này
+public class LogIn extends JFrame  {
+    
+	
+    public void logIn() {
+        setTitle("Bạn cần phải đăng nhập tài khoản để chơi game!");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(300, 150);
+        setLocationRelativeTo(null);
+        
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridBagLayout());
+        
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.anchor = GridBagConstraints.CENTER;
+        
+        JLabel titleLabel = new JLabel("Bạn phải đăng nhập tài khoản để chơi game!");
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.gridwidth = 2;
+        gbc.insets = new Insets(0,0,5,0);
+        panel.add(titleLabel, gbc);
+        
+        JButton loginBtn = new JButton("Đăng nhập");
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.gridwidth = 1;
+        gbc.insets = new Insets(10,5,5,5);
+        panel.add(loginBtn, gbc);
+        
+        JButton SigninBtn = new JButton("Đăng ký");
+        gbc.gridx = 1; // Sửa từ 2 thành 1
+        gbc.gridy = 1;
+        gbc.gridwidth = 1;
+        panel.add(SigninBtn, gbc);
+        
+        
+        getContentPane().add(panel);
+        setVisible(true);
     }
 
     public static void main(String[] args) {
-        new LogIn();
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new LogIn().logIn();
+            }
+        });
     }
 
 }
