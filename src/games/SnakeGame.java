@@ -134,11 +134,11 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener {
 //            g.drawLine(i*tileSize, 0, i*tileSize, boardHeight);
 //            g.drawLine(0, i*tileSize, boardWidth, i*tileSize); 
 //        }
-		for (int row = 0; row < boardHeight / tileSize; row++) {
-            for (int col = 0; col < boardWidth / tileSize; col++) {
+		for (int row = 0; row < boardHeight - 2 / tileSize; row++) {
+            for (int col = 0; col < boardWidth - 2 / tileSize; col++) {
                 // Tính toán tọa độ x và y của ô
-                int x = col * tileSize;
-                int y = row * tileSize;
+                int x = col * tileSize  ;
+                int y = row * tileSize ;
 
                 // Tô màu cho ô
                 if (row ==0 || col ==0 || col == boardHeight/tileSize -1 || row == boardWidth/tileSize -1) { // Tô màu xen kẽ
@@ -198,18 +198,41 @@ private String calculateScore() {
 //	
 
     
-    
-    
-	private void checkFood() {
-        if (snakeHead.x == food.x && snakeHead.y == food.y) {
-            snakeBody.add(new Tile(food.x, food.y));
-            food.placeFood(boardWidth, boardHeight, tileSize);
+private boolean isFoodOnSnake(int x, int y) {
+    ArrayList<Tile> body = snakeBody.getBody();
+    for (Tile part : body) {
+        if (part.x == x && part.y == y) {
+            return true; // Thức ăn nằm trên thân rắn
         }
+    }
+    return false; // Thức ăn không nằm trên thân rắn
+}
+
+private void placeFood(int maxWidth, int maxHeight, int tileSize) {
+    Random random = new Random();
+    int x, y;
+    do {
+        x = random.nextInt(maxWidth - 2) + 1; // Ngẫu nhiên vị trí x trong khoảng từ 1 đến maxWidth - 2
+        y = random.nextInt(maxHeight - 2) + 1; // Ngẫu nhiên vị trí y trong khoảng từ 1 đến maxHeight - 2
+    } while (isFoodOnSnake(x, y)); // Kiểm tra xem vị trí mới có trùng với thân rắn không
+
+    // Đặt thức ăn vào vị trí mới
+    food.x = x;
+    food.y = y;
+}
+    
+private void checkFood() {
+    if (snakeHead.x == food.x && snakeHead.y == food.y) {
+        snakeBody.add(new Tile(food.x, food.y));
+        placeFood(boardWidth / tileSize, boardHeight / tileSize, tileSize);
+    }
+}
+
 //		if(collision(snakeHead, food)) {
 //			snakeBody.add(new Tile(food.x, food.y));
 //			food.placeFood(boardWidth, boardHeight, tileSize);
 //		}
-    }
+    
 	public void moveBody() {
 		for(int i = snakeBody.getBody().size()-1; i>=0; i--) {
 			Tile snakePart = snakeBody.getBody().get(i);
@@ -236,8 +259,8 @@ private String calculateScore() {
             }
         }
 
-        if (snakeHead.x < 0 || snakeHead.x >= boardWidth / tileSize ||
-            snakeHead.y < 0 || snakeHead.y >= boardHeight / tileSize) {
+        if (snakeHead.x < 1 || snakeHead.x >= (boardWidth / tileSize)-1 ||
+            snakeHead.y < 1 || snakeHead.y >= (boardHeight / tileSize)-1) {
             gameOver = true;
         }
         

@@ -4,7 +4,6 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 
 import javax.swing.*;
-
 public class LogIn extends JFrame  {
     
 	
@@ -34,11 +33,21 @@ public class LogIn extends JFrame  {
         gbc.insets = new Insets(10,5,5,5);
         panel.add(loginBtn, gbc);
         
-        JButton SigninBtn = new JButton("Đăng ký");
+        JButton signinBtn = new JButton("Đăng ký");
         gbc.gridx = 1; // Sửa từ 2 thành 1
         gbc.gridy = 1;
         gbc.gridwidth = 1;
-        panel.add(SigninBtn, gbc);
+        panel.add(signinBtn, gbc);
+        
+        loginBtn.addActionListener(e -> {
+        	LoginForm loginForm = new LoginForm();
+        	loginForm.setVisible(true);
+        });
+        
+        signinBtn.addActionListener(e -> {
+        	SignForm signForm = new SignForm();
+        	signForm.setVisible(true);
+        });
         
         
         getContentPane().add(panel);
@@ -46,12 +55,7 @@ public class LogIn extends JFrame  {
     }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new LogIn().logIn();
-            }
-        });
+        SwingUtilities.invokeLater(() -> new LogIn().logIn());
     }
 
 }
