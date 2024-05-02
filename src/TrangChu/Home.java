@@ -24,6 +24,8 @@ public class Home extends JFrame implements ActionListener {
         gbc.gridy = 0;
         gbc.insets = new Insets(10, 10, 10, 10);
         panel.add(playButton, gbc);
+        
+        
 
         getContentPane().add(panel);
         pack(); // Tự động điều chỉnh kích thước cửa sổ dựa trên nội dung của nó
