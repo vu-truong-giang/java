@@ -43,7 +43,7 @@ public class LoginForm extends JFrame implements ActionListener {
     	userPanel.add(userField);
     	
     	JPanel passPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-    	JLabel passLabel = new JLabel("Password:");
+    	JLabel passLabel = new JLabel("Password");
     	passLabel.setFont(font);
     	passField = new JPasswordField(20);
     	passField.setFont(font);
@@ -51,7 +51,7 @@ public class LoginForm extends JFrame implements ActionListener {
     	passPanel.add(passField);
     	
     	JPanel rememberPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-    	rememberCheckBox = new JCheckBox(" Remember Password");
+    	rememberCheckBox = new JCheckBox(" Remember Password :");
     	rememberPanel.add(rememberCheckBox);
     	
     	JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER));

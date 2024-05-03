@@ -17,6 +17,7 @@ public class App extends JFrame {
         frame.add(snakeGame);
         frame.pack();
         snakeGame.requestFocus();
+        
 //          
 //          Map map = new Map(boardWidth, boardHeight);
 //          frame.add(map);

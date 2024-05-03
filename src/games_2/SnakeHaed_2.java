@@ -1,10 +1,11 @@
+package games_2;
 
-public class SnakeHead {
+public class SnakeHaed_2{
 	int x;
 	int y;
 	int velocityX;
 	int velocityY;
-	public SnakeHead(int x, int y) {
+	public SnakeHaed_2(int x, int y) {
 		
 		this.x = x;
 		this.y = y;

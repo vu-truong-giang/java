@@ -1,6 +1,6 @@
 package games;
 
-import java.awt.*;
+import java.awt.*; 
 
 
 import java.awt.event.*;
@@ -19,9 +19,11 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener {
     private Timer gameLoop;
     private boolean gameOver;
     int levelScore[] = {1,2,3,4,5};
-    int speed[] = {500,400,300,200,300,100};
+    int speed[] = {500,450,400,350,300,250,200,150,100,50};
     private JComboBox lv = new JComboBox();
     private JButton newGame_bt;
+    private Game_Over game_Over;
+    private Map map;
 
     //snake
     private JPanel pn;
@@ -42,14 +44,17 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener {
         snakeBody = new SnakeBody();
         food = new Food(10,10);
         gameOver = false;
+        map = new Map(tileSize);
 		//game timer
         
         Level level = new Level(speed);
         level.start();
 		gameLoop = new Timer(level.getCurrentLevel(),this); 
-        gameLoop.start();
+        //gameLoop.start();// bắt đầu trò chơi
         
-        JButton level_bt = new JButton("Level "+ (level.getCurrentLevel()));
+        
+        
+        JButton level_bt = new JButton("Level "+ (level.getCurrentLevel()+1));
         level_bt.addActionListener(new ActionListener() {
 			
 			@Override
@@ -57,27 +62,28 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener {
 				// TODO Auto-generated method stub
 				level.nextLevel();
 				gameLoop.setDelay(level.getCurrentSpeed());
-				level_bt.setText("Level " + (level.getCurrentLevel()));
+				level_bt.setText("Level " + (level.getCurrentLevel()+1));
 			}
 		});
-        JPanel level_pn = new JPanel();
-        level_pn.add(level_bt);
-        add(level_pn, BorderLayout.SOUTH);
+        JPanel level_pn = new JPanel(new BorderLayout());
+        level_pn.add(level_bt, BorderLayout.NORTH);
+        add(level_pn, BorderLayout.NORTH);
         
         
         
-        newGame_bt = new JButton("New Game");
+        newGame_bt = new JButton("Start");
         newGame_bt.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				resetGame();
+				newGame_bt.setVisible(false);
 			}
 		});
         
-        int currentLevel = 0;
-        int score =0;
+//        int currentLevel = 0;
+//        int score =0;
         
         
         
@@ -90,11 +96,12 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener {
         
         
         
+        
        
 	}	
     
-	int[] soreMu = {1,2,3,4,5};
-    int currentLevel = 0;
+	//int[] soreMu = {1,2,3,4,5};
+    int currentLevel = 1;
     int currentScore =0;
     
     int scoreMu = levelScore[currentLevel];
@@ -103,9 +110,22 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener {
     
     public int currentScore () {
     	int baseScore = snakeBody.getBody().size();
-    	int scoreMu = levelScore[currentLevel];
-    	
-		return (int)(baseScore*scoreMu);
+//    	int scoreMu = levelScore[currentLevel];
+//    	
+//		return (int)(baseScore*scoreMu);
+    	int scoreMu = 1;
+    	if(currentLevel==1) {
+    		scoreMu = 1;
+    	}else if(currentLevel == 2) {
+    		scoreMu = 2;
+    	}else if(currentLevel == 3) {
+    		scoreMu = 3;
+    	}else if(currentLevel == 4) {
+    		scoreMu = 4;
+    	}else if(currentLevel == 5) {
+    		scoreMu = 5;
+    	}
+    	return(int) baseScore * scoreMu;
     }
     
     private void resetGame() {
@@ -114,8 +134,9 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener {
     	food = new Food(10, 10);
     	gameOver = false;
     	
-    	gameLoop.restart();
+    	gameLoop.restart();;
     }
+    
     
     
     
@@ -149,6 +170,7 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener {
                 g.fillRect(x, y, tileSize, tileSize);
             }
         }
+		
 
         //Food
         g.setColor(Color.red);
@@ -177,23 +199,15 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener {
 //              gameOver = true;
 //              return;
         }
+        
         else {
-        	g.setColor(Color.black);
+        	g.setColor(Color.red);
+        	
             g.drawString("Score: " + currentScore(), tileSize - 16, tileSize);
             
         }
 	}
 	
-	
-	
-	
-	
-
-	
-private String calculateScore() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 //	
 
@@ -236,12 +250,13 @@ private String calculateScore() {
             }
         }
 
-        if (snakeHead.x < 0 || snakeHead.x >= boardWidth / tileSize ||
-            snakeHead.y < 0 || snakeHead.y >= boardHeight / tileSize) {
+        if (snakeHead.x -2 < 0 || snakeHead.x >= boardWidth / tileSize -2 ||
+            snakeHead.y -2 < 0 || snakeHead.y >= boardHeight / tileSize -2) {
             gameOver = true;
         }
         
     }
+	
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -252,8 +267,13 @@ private String calculateScore() {
         	checkCollision();
         	repaint();
         }
-        
-    }  
+        else if(gameOver){
+        	gameLoop.stop();
+        	SwingUtilities.invokeLater(()-> new Game_Over(this));// chuyển sang Game_Over
+        	
+        }
+    }
+//        
 
     @Override
     public void keyPressed(KeyEvent e) {

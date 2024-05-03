@@ -1,6 +1,11 @@
-import javax.swing.*;
+package games_2;
 
-public class App {
+import javax.swing.JFrame;
+
+
+import games_2.SnakeGame_2;
+
+public class App_2 extends JFrame {
     public static void main(String[] args) throws Exception {
         int boardWidth = 600;
         int boardHeight = boardWidth;
@@ -12,17 +17,12 @@ public class App {
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        SnakeGame snakeGame = new SnakeGame(boardWidth, boardHeight);
+        SnakeGame_2 snakeGame = new SnakeGame_2(boardWidth, boardHeight);
         frame.add(snakeGame);
         frame.pack();
         snakeGame.requestFocus();
-//          
-//          Map map = new Map(boardWidth, boardHeight);
-//          frame.add(map);
-//          frame.pack();
-//        new snakeGameee();
-//        frame.add(snakeGameee);
-//        frame.pack();
+        
+        
         
     }
 }
