@@ -14,6 +14,7 @@ public class VolumeSliderUI extends JFrame implements ActionListener {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(300, 200);
         setVisible(true);
+        setLocationRelativeTo(null);
         setLayout(new GridBagLayout());
 
         GridBagConstraints gbc = new GridBagConstraints();

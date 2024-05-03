@@ -1,5 +1,8 @@
 package LogIn;
 import javax.swing.*;
+
+import TrangChu.SnakeGameGUI;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -53,19 +56,24 @@ public class LoginForm extends JFrame {
         gbc.anchor = GridBagConstraints.CENTER; // Đặt cố định vào giữa
         panel.add(loginButton, gbc);
 
-        loginButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String username = usernameField.getText();
-                String password = String.valueOf(passwordField.getPassword());
-                // Kiểm tra tên đăng nhập và mật khẩu ở đây
-                if(username.equals("admin") && password.equals("123")) {
-                	JOptionPane.showMessageDialog(null , "Đăng nhập thành công");
-                } else {
-                	JOptionPane.showMessageDialog(null, "Tên đang nhập hoặc mật khẩu không đúng!");
-                }
+        loginButton.addActionListener(e -> {
+            String username = usernameField.getText();
+            String password = new String(passwordField.getPassword());
+
+            // Kiểm tra thông tin đăng nhập
+            if (username.equals("admin") && password.equals("123")) {
+                // Đăng nhập thành công, hiển thị thông báo
+                JOptionPane.showMessageDialog(this, "Đăng nhập thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                
+                // Mở SnakeGameGUI
+                dispose(); // Đóng cửa sổ đăng nhập
+                SwingUtilities.invokeLater(() -> new SnakeGameGUI().setVisible(true));
+            } else {
+                // Hiển thị thông báo lỗi nếu đăng nhập không thành công
+                JOptionPane.showMessageDialog(this, "Tên đăng nhập hoặc mật khẩu không đúng!", "Lỗi Đăng Nhập", JOptionPane.ERROR_MESSAGE);
             }
         });
+
 
         getContentPane().add(panel);
         setVisible(true);

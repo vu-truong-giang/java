@@ -25,5 +25,6 @@ public class App extends JFrame {
 //        frame.add(snakeGameee);
 //        frame.pack();
         
-    }
+    
 }
+
