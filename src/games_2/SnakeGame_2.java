@@ -73,8 +73,6 @@ public class SnakeGame_2 extends JPanel implements ActionListener, KeyListener {
     	map.drawMap_3(g, 600, 600);
     	
     	
-        
-    	
         g.drawImage(headImg,snakeHead.x * tileSize, snakeHead.y * tileSize, tileSize, tileSize,this);
 
         // Vẽ thức ăn
