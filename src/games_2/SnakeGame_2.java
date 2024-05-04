@@ -30,6 +30,8 @@ public class SnakeGame_2 extends JPanel implements ActionListener, KeyListener {
     private Image foodImg;
     private Image headImg;
     private Image bodyImg;
+    private Map_2 map;
+    private SnakeColor_2 snakeColor;
     
 
     public SnakeGame_2(int boardWidth, int boardHeight) {
@@ -51,6 +53,9 @@ public class SnakeGame_2 extends JPanel implements ActionListener, KeyListener {
         snakeHead = new SnakeHaed_2(5, 5);
         snakeBody = new SnakrBody_2();
         food = new Food_2(10, 10);
+        map = new Map_2(tileSize);
+        
+        
         gameOver = false;
         
 
@@ -64,8 +69,12 @@ public class SnakeGame_2 extends JPanel implements ActionListener, KeyListener {
     }
 
     public void draw(Graphics g) {
-        // Vẽ rắn
+    	
+    	map.drawMap_3(g, 600, 600);
+    	
+    	
         
+    	
         g.drawImage(headImg,snakeHead.x * tileSize, snakeHead.y * tileSize, tileSize, tileSize,this);
 
         // Vẽ thức ăn
@@ -82,8 +91,10 @@ public class SnakeGame_2 extends JPanel implements ActionListener, KeyListener {
         g.setColor(Color.white);
         g.setFont(new Font("Arial", Font.PLAIN, 16));
         if (gameOver) {
+        	g.setColor(Color.red);
             g.drawString("Game Over: " + score, tileSize - 16, tileSize);
         } else {
+        	g.setColor(Color.red);
             g.drawString("Score: " + score, tileSize - 16, tileSize);
         }
     }
@@ -176,8 +187,8 @@ public class SnakeGame_2 extends JPanel implements ActionListener, KeyListener {
             }
         }
 
-        if (snakeHead.x < 0 || snakeHead.x >= boardWidth / tileSize ||
-            snakeHead.y < 0 || snakeHead.y >= boardHeight / tileSize) {
+        if (snakeHead.x - 2 < 0 || snakeHead.x >= boardWidth / tileSize - 2 ||
+            snakeHead.y - 2 < 0 || snakeHead.y >= boardHeight / tileSize - 2) {
             gameOver = true;
         }
     }

@@ -1,104 +1,103 @@
 package LogIn;
-
-import java.awt.Color;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.GridLayout;
+import javax.swing.*
+;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
+public class SignForm extends JFrame {
 
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private JTextField usernameField;
+    private JPasswordField passwordField;
+    private JPasswordField confirmPasswordField;
 
-public class SignForm extends JFrame  implements ActionListener{
-	private JTextField fullName;
-	private JTextField email;
-	private JTextField phone;
-	private JPasswordField pass;
-	private JPasswordField repeat;
-	private JButton signUp;
-	
-	
-	public SignForm() {
-		setTitle("Sign Form");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(300, 500);
-		setLocationRelativeTo(null);
-		
-		setLayout(new GridLayout(7, 1,10,10));
-		
-		Font font = new Font("Arial", Font.BOLD, 15);
-		
-		JPanel signupPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-		JLabel signupLabel = new JLabel("SIGN UP");
-		signupLabel.setFont(new Font("Arial", Font.BOLD, 20));
-		signupPanel.add(signupLabel);
-		
-		JPanel fullnamePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-		JLabel fullnameLabel = new JLabel("Full name  :");
-		fullName = new JTextField(15);
-		fullnamePanel.add(fullnameLabel);
-		fullnamePanel.add(fullName);
-		
-		JPanel emailPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-		JLabel emailLabel = new JLabel("Email         :");
-		email = new JTextField(15);
-		emailPanel.add(emailLabel);
-		emailPanel.add(email);
-		
-		JPanel phonePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-		JLabel phoneLabel = new JLabel("Phone       :");
-		phone = new JTextField(15);
-		phonePanel.add(phoneLabel);
-		phonePanel.add(phone);
-		
-		JPanel passPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-		JLabel passLabel = new JLabel("Password :");
-		pass = new JPasswordField(15);
-		passPanel.add(passLabel);
-		passPanel.add(pass);
-		
-		JPanel repeatLPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-		JLabel repeatLabel = new JLabel("Repeat      :");
-		repeat = new JPasswordField(15);
-		repeatLPanel.add(repeatLabel);
-		repeatLPanel.add(repeat);
-		
-		JPanel signUpPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-		signUp = new JButton("Sign Up");
-		signUp.setFont(font);
-		signUp.setBackground(Color.red);
-		signUpPanel.add(signUp);
-		
-		add(signupPanel);
-		add(fullnamePanel);
-		add(emailPanel);
-		add(phonePanel);
-		add(passPanel);
-		add(repeatLPanel);
-		add(signUpPanel);
-		pack();
-		
-		setVisible(true);
-		
-		
-		
-		
-		
-		
-	}
-	public static void main(String[] args) {
-		new SignForm();
-	}
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
+    public SignForm() {
+        setTitle("Đăng ký");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(300, 200);
+        setLocationRelativeTo(null);
 
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridBagLayout());
+        
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.anchor = GridBagConstraints.WEST;
+        gbc.insets = new Insets(5,5,5,5);
+
+        JLabel usernameLabel = new JLabel("Tên đăng nhập:");
+        gbc.gridx = 0 ;
+        gbc.gridy = 0;
+        gbc.gridwidth = 1;
+        panel.add(usernameLabel, gbc);
+        
+        usernameField = new JTextField(15);
+        gbc.gridx = 1;
+        gbc.gridy = 0;
+        gbc.gridwidth = 2;
+        panel.add(usernameField, gbc);
+        
+        JLabel passwordLabel = new JLabel("Mật khẩu:");
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.gridwidth = 1;
+        panel.add(passwordLabel, gbc);
+        
+        passwordField = new JPasswordField(15);
+        gbc.gridx = 1;
+        gbc.gridy = 1;
+        gbc.gridwidth = 2;
+        panel.add(passwordField, gbc);
+        
+        JLabel confirmPasswordLabel = new JLabel("Xác nhận mật khẩu:");
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        gbc.gridwidth = 1;
+        panel.add(confirmPasswordLabel, gbc);
+        
+        confirmPasswordField = new JPasswordField(15);
+        gbc.gridx = 1;
+        gbc.gridy = 2;
+        gbc.gridwidth = 2;
+        panel.add(confirmPasswordField, gbc);
+        
+        JButton registerButton = new JButton("Đăng ký");
+        gbc.gridx = 1;
+        gbc.gridy = 3;
+        gbc.gridwidth = 2;
+        gbc.anchor = GridBagConstraints.CENTER;
+        panel.add(registerButton, gbc);
+
+        registerButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String username = usernameField.getText();
+                String password = String.valueOf(passwordField.getPassword());
+                String confirmPassword = String.valueOf(confirmPasswordField.getPassword());
+
+                // Kiểm tra mật khẩu và xác nhận mật khẩu
+                if (!password.equals(confirmPassword)) {
+                    JOptionPane.showMessageDialog(null, "Mật khẩu và xác nhận mật khẩu không khớp!");
+                } else {
+                    // Thực hiện đăng ký tài khoản ở đây
+                    JOptionPane.showMessageDialog(null, "Tài khoản đã được đăng ký thành công!");
+                }
+            }
+        });
+
+        getContentPane().add(panel);
+        setVisible(true);
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new SignForm();
+            }
+        });
+    }
 }
