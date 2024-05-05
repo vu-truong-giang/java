@@ -1,6 +1,7 @@
 package Home;
 
-import javax.swing.*; 
+import javax.swing.*;
+ 
 import games.SnakeGame; // Assuming SnakeGame class is part of the games package
 import games.*;
 import games_2.*;
@@ -14,6 +15,7 @@ public class SnakeGameGUI extends JFrame implements ActionListener {
     private JButton leaderboardButton;
     private JButton selectMapButton;
     private SnakeGame snakeGame;
+    private SnakeGame_2 snakeGame_2;
 
     public SnakeGameGUI() {
         setTitle("Snake Game");
@@ -82,8 +84,8 @@ public class SnakeGameGUI extends JFrame implements ActionListener {
             gameWindow.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // Dispose the window when closed
             
             // Create an instance of SnakeGame and add it to the game window
-            SnakeGame snakeGame = new SnakeGame(600, 600); // Adjust the dimensions as needed
-            gameWindow.add(snakeGame);
+            SnakeGame_2 snakeGame_2 = new SnakeGame_2(600, 600); // Adjust the dimensions as needed
+            gameWindow.add(snakeGame_2);
             
             // Pack and display the game window
             gameWindow.pack();

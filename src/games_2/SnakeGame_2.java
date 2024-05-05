@@ -1,6 +1,7 @@
 package games_2;
 import javax.imageio.ImageIO ;
 
+
 import javax.swing.*;
 import games.*;
 import java.io.File;
@@ -42,19 +43,14 @@ public class SnakeGame_2 extends JPanel implements ActionListener, KeyListener {
         addKeyListener(this);
         setFocusable(true);
         
-        try {
-			foodImg = ImageIO.read(getClass().getResource("/img/food.png"));
-			headImg = ImageIO.read(getClass().getResource("/img/head.png"));
-			bodyImg = ImageIO.read(getClass().getResource("/img/body.png"));
-		} catch (IOException e) {
-			// TODO: handle exception
-		}
+        
 
         snakeHead = new SnakeHaed_2(5, 5);
         snakeBody = new SnakrBody_2();
         food = new Food_2(10, 10);
         map = new Map_2(tileSize);
-        
+        //snakeColor = new SnakeColor_2(snakeHead, snakeBody, food, boardHeight, headImg, bodyImg, foodImg)
+        snakeColor = new SnakeColor_2(snakeHead, snakeBody, food, tileSize);
         
         gameOver = false;
         
@@ -70,20 +66,30 @@ public class SnakeGame_2 extends JPanel implements ActionListener, KeyListener {
 
     public void draw(Graphics g) {
     	
-    	map.drawMap_3(g, 600, 600);
+    	map.drawMap(g, 600, 600);
     	
-    	
-        g.drawImage(headImg,snakeHead.x * tileSize, snakeHead.y * tileSize, tileSize, tileSize,this);
-
-        // Vẽ thức ăn
-        g.drawImage(foodImg, food.x * tileSize, food.y * tileSize, tileSize, tileSize, this);
-
-        // Vẽ mảng các phần của rắn
-        //g.setColor(Color.green);
-        ArrayList<Tile_2> body = snakeBody.getBody();
-        for (Tile_2 part : body) {
-            g.drawImage(bodyImg,part.x * tileSize, part.y * tileSize, tileSize, tileSize,this);
-        }
+    	snakeColor.draw_4(g);
+//    	
+//    	try {
+//			foodImg = ImageIO.read(getClass().getResource("/img/food.png"));
+//			headImg = ImageIO.read(getClass().getResource("/img/head.png"));
+//			bodyImg = ImageIO.read(getClass().getResource("/img/body.png"));
+//		} catch (IOException e) {
+//			// TODO: handle exception
+//		}
+//    	
+//    	
+//        g.drawImage(headImg,snakeHead.x * tileSize, snakeHead.y * tileSize, tileSize, tileSize,this);
+//
+//        // Vẽ thức ăn
+//        g.drawImage(foodImg, food.x * tileSize, food.y * tileSize, tileSize, tileSize, this);
+//
+//        // Vẽ mảng các phần của rắn
+//        //g.setColor(Color.green);
+//        ArrayList<Tile_2> body = snakeBody.getBody();
+//        for (Tile_2 part : body) {
+//            g.drawImage(bodyImg,part.x * tileSize, part.y * tileSize, tileSize, tileSize,this);
+//        }
 
         // Vẽ điểm số
         g.setColor(Color.white);

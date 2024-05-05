@@ -2,7 +2,8 @@ package games;
 
 import java.awt.*; 
 
-
+import javax.imageio.ImageIO ;
+import java.io.IOException;
 import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.Random;
@@ -23,7 +24,11 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener {
     private JComboBox lv = new JComboBox();
     private JButton newGame_bt;
     private Game_Over game_Over;
+    private Image foodImg;
+    private Image headImg;
+    private Image bodyImg;
     private Map map;
+    private SnakeColor snakeColor;
 
     //snake
     private JPanel pn;
@@ -43,8 +48,10 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener {
         snakeHead = new SnakeHead(5,5);
         snakeBody = new SnakeBody();
         food = new Food(10,10);
-        gameOver = false;
         map = new Map(tileSize);
+        snakeColor = new SnakeColor(snakeHead, snakeBody, food, tileSize, headImg, bodyImg, foodImg);
+        gameOver = false;
+        
 		//game timer
         
         Level level = new Level(speed);
@@ -132,6 +139,8 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener {
     	snakeHead = new SnakeHead(5, 5);
     	snakeBody = new SnakeBody();
     	food = new Food(10, 10);
+    	map = new Map(tileSize);
+        snakeColor = new SnakeColor(snakeHead, snakeBody, food, tileSize, headImg, bodyImg, foodImg);
     	gameOver = false;
     	
     	gameLoop.restart();;
@@ -149,46 +158,50 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener {
 	}
 
 	public void draw(Graphics g) {
+		// tạo lưới
         //Grid Lines
 //        for(int i = 0; i < boardWidth/tileSize; i++) {
 //            //(x1, y1, x2, y2)
 //            g.drawLine(i*tileSize, 0, i*tileSize, boardHeight);
 //            g.drawLine(0, i*tileSize, boardWidth, i*tileSize); 
 //        }
-		for (int row = 0; row < boardHeight / tileSize; row++) {
-            for (int col = 0; col < boardWidth / tileSize; col++) {
-                // Tính toán tọa độ x và y của ô
-                int x = col * tileSize;
-                int y = row * tileSize;
-
-                // Tô màu cho ô
-                if (row ==0 || col ==0 || col == boardHeight/tileSize -1 || row == boardWidth/tileSize -1) { // Tô màu xen kẽ
-                    g.setColor(Color.white);
-                } else {
-                    g.setColor(Color.BLACK);
-                }
-                g.fillRect(x, y, tileSize, tileSize);
-            }
-        }
+//		for (int row = 0; row < boardHeight / tileSize; row++) {
+//            for (int col = 0; col < boardWidth / tileSize; col++) {
+//                // Tính toán tọa độ x và y của ô
+//                int x = col * tileSize;
+//                int y = row * tileSize;
+//
+//                // Tô màu cho ô
+//                if (row ==0 || col ==0 || col == boardHeight/tileSize -1 || row == boardWidth/tileSize -1) { // Tô màu xen kẽ
+//                    g.setColor(Color.white);
+//                } else {
+//                    g.setColor(Color.BLACK);
+//                }
+//                g.fillRect(x, y, tileSize, tileSize);
+//            }
+//        }
+		map.drawMap_3(g, 600, 600);
+		
+		snakeColor.draw(g);
 		
 
         //Food
-        g.setColor(Color.red);
-        
-        g.fill3DRect(food.x*tileSize-1, food.y*tileSize-1, tileSize, tileSize, true);
-
-        //Snake Head
-        g.setColor(Color.blue);
-        
-        g.fill3DRect(snakeHead.x*tileSize, snakeHead.y*tileSize, tileSize, tileSize, true);
-
-        
-        g.setColor(Color.green);
-        ArrayList<Tile> body = snakeBody.getBody();
-        for(Tile part : body) {
-        	g.fillRect(part.x * tileSize, part.y * tileSize, tileSize, tileSize);
-        }
-       
+//        g.setColor(Color.red);
+//        
+//        g.fill3DRect(food.x*tileSize-1, food.y*tileSize-1, tileSize, tileSize, true);
+//
+//        //Snake Head
+//        g.setColor(Color.blue);
+//        
+//        g.fill3DRect(snakeHead.x*tileSize, snakeHead.y*tileSize, tileSize, tileSize, true);
+//
+//        
+//        g.setColor(Color.green);
+//        ArrayList<Tile> body = snakeBody.getBody();
+//        for(Tile part : body) {
+//        	g.fillRect(part.x * tileSize, part.y * tileSize, tileSize, tileSize);
+//        }
+//       
         //Score
         g.setFont(new Font("Arial", Font.PLAIN, 16));
         if (gameOver) {

@@ -23,13 +23,13 @@ public class SnakeSettingUI extends JFrame implements ActionListener {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(5, 5, 5, 5);
 
-        ImageIcon iconLeft = new ImageIcon(Toolkit.getDefaultToolkit().createImage(SnakeSettingUI.class.getResource("Icon_left.png")));
+        ImageIcon iconLeft = new ImageIcon(Toolkit.getDefaultToolkit().createImage(SnakeSettingUI.class.getResource("/img/Icon_left.png")));
         // Scale the image to a smaller size
         Image scaledImageLeft = iconLeft.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
         // Create a new ImageIcon with the scaled image
         ImageIcon scaledIconLeft = new ImageIcon(scaledImageLeft);
         
-        ImageIcon iconRight = new ImageIcon(Toolkit.getDefaultToolkit().createImage(SnakeSettingUI.class.getResource("Icon_right.png")));
+        ImageIcon iconRight = new ImageIcon(Toolkit.getDefaultToolkit().createImage(SnakeSettingUI.class.getResource("/img/Icon_right.png")));
         // Scale the image to a smaller size
         Image scaledImageRight = iconRight.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
         // Create a new ImageIcon with the scaled image
@@ -61,7 +61,7 @@ public class SnakeSettingUI extends JFrame implements ActionListener {
         imgMapLabels = new JLabel[4];
         for ( int i= 0 ; i < imgMapLabels.length ; i++) {
         	imgMapLabels[i] = new JLabel();
-        	imgMapLabels[i].setIcon(new ImageIcon(Toolkit.getDefaultToolkit().createImage(SnakeSettingUI.class.getResource("img"+i+".jpg"))));
+        	imgMapLabels[i].setIcon(new ImageIcon(Toolkit.getDefaultToolkit().createImage(SnakeSettingUI.class.getResource("/img/img"+i+".png"))));
         }
         
         size = 200;
@@ -103,7 +103,7 @@ public class SnakeSettingUI extends JFrame implements ActionListener {
         imgSnakeLabels = new JLabel[4];
         for ( int i= 0 ; i < imgSnakeLabels.length ; i++) {
         	imgSnakeLabels[i] = new JLabel();
-        	imgSnakeLabels[i].setIcon(new ImageIcon(Toolkit.getDefaultToolkit().createImage(SnakeSettingUI.class.getResource("img"+i+".jpg"))));
+        	imgSnakeLabels[i].setIcon(new ImageIcon(Toolkit.getDefaultToolkit().createImage(SnakeSettingUI.class.getResource("/img/imgColor_"+i+".png"))));
         }
         
         JLabel imgSnakeLabel = imgSnakeLabels[currentSnakeIndex];
@@ -143,7 +143,7 @@ public class SnakeSettingUI extends JFrame implements ActionListener {
 
 			private void updateMapLabels() {
 				mapLabel.setText("Map " + currentMapIndex); // Cập nhật văn bản của mapLabel
-	            imgMapLabel.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().createImage(SnakeSettingUI.class.getResource("img" + currentMapIndex + ".jpg")))); // Cập nh
+	            imgMapLabel.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().createImage(SnakeSettingUI.class.getResource("/img/img" + currentMapIndex + ".png")))); // Cập nh
 			}
         });
         
@@ -155,7 +155,7 @@ public class SnakeSettingUI extends JFrame implements ActionListener {
             
             private void updateMapLabels() {
             	mapLabel.setText("Map " + currentMapIndex);
-            	imgMapLabel.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().createImage(SnakeSettingUI.class.getResource("img" + currentMapIndex + ".jpg"))));
+            	imgMapLabel.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().createImage(SnakeSettingUI.class.getResource("/img/img" + currentMapIndex + ".png"))));
             }
         });
         
@@ -167,7 +167,7 @@ public class SnakeSettingUI extends JFrame implements ActionListener {
             
             private void updateSnakeLabels() {
             	snakeLabel.setText("Snake " + currentSnakeIndex);
-            	imgSnakeLabel.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().createImage(SnakeSettingUI.class.getResource("img" + currentSnakeIndex + ".jpg"))));
+            	imgSnakeLabel.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().createImage(SnakeSettingUI.class.getResource("/img/imgColor_" + currentSnakeIndex + ".png"))));
             }
         });
         
@@ -179,7 +179,7 @@ public class SnakeSettingUI extends JFrame implements ActionListener {
             
             private void updateSnakeLabels() {
             	snakeLabel.setText("Snake " + currentSnakeIndex);
-            	imgSnakeLabel.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().createImage(SnakeSettingUI.class.getResource("img" + currentSnakeIndex + ".jpg"))));
+            	imgSnakeLabel.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().createImage(SnakeSettingUI.class.getResource("/img/imgColor_" + currentSnakeIndex + ".png"))));
             }
         });
         
