@@ -1,10 +1,15 @@
 package TrangChu;
 
 import javax.swing.*;
-import games.SnakeGame; // Assuming SnakeGame class is part of the games package
+
+import Sound.PlayMusicInMap;
+import Sound.playMusic;
+import games.SnakeGame;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SnakeGameGUI extends JFrame implements ActionListener {
     private JButton playButton;
@@ -12,13 +17,15 @@ public class SnakeGameGUI extends JFrame implements ActionListener {
     private JButton soundButton;
     private JButton leaderboardButton;
     private JButton selectMapButton;
-    private SnakeGame snakeGame;
+    private playMusic musicPlayer;
 
     public SnakeGameGUI() {
         setTitle("Snake Game");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(400, 300);
         setLocationRelativeTo(null);
+        
+        
 
         JPanel panel = new JPanel();
         panel.setLayout(new GridBagLayout());
@@ -41,7 +48,7 @@ public class SnakeGameGUI extends JFrame implements ActionListener {
         gbc.weightx = 1.0;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         panel.add(playButton, gbc);
-        
+
         leaderboardButton = new JButton("Leaderboard");
         leaderboardButton.addActionListener(this);
         gbc.gridx = 0;
@@ -53,7 +60,8 @@ public class SnakeGameGUI extends JFrame implements ActionListener {
         selectMapButton = new JButton("Select Map");
         selectMapButton.addActionListener(e -> {
             SwingUtilities.invokeLater(() -> new SnakeSettingUI().setVisible(true));
-        });        gbc.gridx = 1;
+        });
+        gbc.gridx = 1;
         gbc.gridy = 3;
         gbc.gridwidth = 1;
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -67,11 +75,12 @@ public class SnakeGameGUI extends JFrame implements ActionListener {
         gbc.gridy = 3;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         panel.add(soundButton, gbc);
-        
+
         add(panel);
         pack();
         setLocationRelativeTo(null);
         setVisible(true);
+        
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -79,11 +88,11 @@ public class SnakeGameGUI extends JFrame implements ActionListener {
             // Create a new JFrame for the game window
             JFrame gameWindow = new JFrame("Snake Game");
             gameWindow.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // Dispose the window when closed
-            
+
             // Create an instance of SnakeGame and add it to the game window
             SnakeGame snakeGame = new SnakeGame(600, 600); // Adjust the dimensions as needed
             gameWindow.add(snakeGame);
-            
+
             // Pack and display the game window
             gameWindow.pack();
             gameWindow.setLocationRelativeTo(null);
@@ -92,13 +101,34 @@ public class SnakeGameGUI extends JFrame implements ActionListener {
             // Handle sound button action
         } else if (e.getSource() == leaderboardButton) {
             // Handle leaderboard button action
-        	
+
         } else if (e.getSource() == selectMapButton) {
             // Handle select map button action
         }
     }
+    
+
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> new SnakeGameGUI());
+    	
+    	
+      
+        // Tạo một luồng mới cho âm thanh
+        Thread soundThread = new Thread(() -> {
+            try {
+                playMusic.run();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }    
+        });
+
+        soundThread.start();
+
+        // Tạo và hiển thị giao diện trực tiếp trong luồng chính
+        SwingUtilities.invokeLater(() -> {
+            SnakeGameGUI gui = new SnakeGameGUI();
+            gui.setVisible(true);
+        });
+    
     }
 }
