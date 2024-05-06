@@ -48,7 +48,7 @@ public class Map_2 {
 					   g.fillRect(150, 325, tileSize, tileSize);
 					   g.fillRect(125, 75, tileSize, tileSize);
 					   g.fillRect(125, 200, tileSize, tileSize);
-					   g.fillRect(150, 325, tileSize, tileSize);
+					   g.fillRect(175, 325, tileSize, tileSize);
 					   g.fillRect(575 , 75, tileSize, tileSize);
 					   g.fillRect(575 , 200, tileSize, tileSize);
 					   g.fillRect(575 , 325, tileSize, tileSize);

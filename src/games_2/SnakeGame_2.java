@@ -65,9 +65,13 @@ public class SnakeGame_2 extends JPanel implements ActionListener, KeyListener {
     }
 
     public void draw(Graphics g) {
-    	
-    	map.drawMap(g, 600, 600);
-    	
+    	//Grid Lines
+//      for(int i = 0; i < boardWidth/tileSize; i++) {
+//          //(x1, y1, x2, y2)
+//          g.drawLine(i*tileSize, 0, i*tileSize, boardHeight);
+//          g.drawLine(0, i*tileSize, boardWidth, i*tileSize); 
+//      }
+    	map.drawMap_3(g, 600, 600);
     	snakeColor.draw_4(g);
 //    	
 //    	try {
@@ -158,12 +162,13 @@ public class SnakeGame_2 extends JPanel implements ActionListener, KeyListener {
     private void checkFood() {
         if (snakeHead.x == food.x && snakeHead.y == food.y) {
             snakeBody.add(new Tile_2(food.x, food.y));
-            food.placeFood(boardWidth, boardHeight, tileSize);
+            food.placeFood_2(boardWidth, boardHeight, tileSize,map);
             moveBody();
             
             
         }
     }
+    // di chuyển
     public void moveBody() {
 		for(int i = snakeBody.getBody().size()-1; i>=0; i--) {
 			Tile_2 snakePart = snakeBody.getBody().get(i);
@@ -181,7 +186,7 @@ public class SnakeGame_2 extends JPanel implements ActionListener, KeyListener {
     public boolean collision(SnakeHaed_2 snakeHead2, Food_2 food2) {
         return snakeHead2.x == food2.x && snakeHead2.y == food2.y;
     }
-
+    // va chạm
     private void checkCollision() {
         ArrayList<Tile_2> body = snakeBody.getBody();
         for (Tile_2 part : body) {
@@ -190,11 +195,57 @@ public class SnakeGame_2 extends JPanel implements ActionListener, KeyListener {
                 return;
             }
         }
+//        if(isWhiteTile_2(snakeHead.x, snakeHead.y)) {
+//        	map.drawMap_2(getGraphics(), 600, 600);
+//        	gameOver = true;
+//        	return;
+//        }else
+            if(isWhiteTile_3(snakeHead.x, snakeHead.y)) {
+        	map.drawMap_3(getGraphics(), 600, 600);
+        	gameOver = true;
+        	return;
+        }
 
-        if (snakeHead.x - 2 < 0 || snakeHead.x >= boardWidth / tileSize - 2 ||
-            snakeHead.y - 2 < 0 || snakeHead.y >= boardHeight / tileSize - 2) {
+        if (snakeHead.x  < 0 || snakeHead.x >= boardWidth / tileSize  ||
+            snakeHead.y  < 0 || snakeHead.y >= boardHeight / tileSize ) {
             gameOver = true;
         }
+    }
+    int [][] whiteTiles_2 = {
+    		{1,2},{2,2},{3,2},{7,2},{8,2},{9,2},{10,2},{11,2},{12,2},{13,2},{14,2},{15,2},{16,2},{17,2},{18,2},{19,2},{20,2},{21,2},{22,2},
+    		{1,4},{2,4},{3,4},{7,4},{8,4},{9,4},{10,4},{11,4},{12,4},{13,4},{14,4},{15,4},{16,4},{17,4},{18,4},{19,4},{20,4},{21,4},{22,4},
+    		{1,7},{2,7},{3,7},{7,7},{8,7},{9,7},{10,7},{11,7},{12,7},{13,7},{14,7},{15,7},{16,7},{17,7},{18,7},{19,7},{20,7},{21,7},{22,7},
+    		{1,9},{2,9},{3,9},{7,9},{8,9},{9,9},{10,9},{11,9},{12,9},{13,9},{14,9},{15,9},{16,9},{17,9},{18,9},{19,9},{20,9},{21,9},{22,9},
+    		{1,12},{2,12},{3,12},{4,12},{5,12},{8,12},{9,12},{10,12},{11,12},{12,12},{13,12},{14,12},{15,12},{16,12},{17,12},{18,12},{19,12},{20,12},{21,12},{22,12},
+    		{1,14},{2,14},{3,14},{4,14},{5,14},{8,14},{9,14},{10,14},{11,14},{12,14},{13,14},{14,14},{15,14},{16,14},{17,14},{18,14},{19,14},{20,14},{21,14},{22,14},
+    		};
+    private boolean isWhiteTile_2(int x, int y) {
+    	for(int i = 0; i<whiteTiles_2.length; i++) {
+    		int whiteTileX = whiteTiles_2[i][0];
+    		int whiteTileY = whiteTiles_2[i][1];
+    		if(x== whiteTileX && y==whiteTileY) {
+    			return true;
+    		}
+    	}
+    	return false;
+    }
+    int [][] whiteTiles_3 = {
+    		{2,1},{2,2},{2,3},{2,7},{2,8},{2,9},{2,10},{2,11},{2,12},{2,13},{2,14},{2,15},{2,16},{2,17},{2,18},{2,19},{2,20},{2,21},{2,22},
+    		{4,1},{4,2},{4,3},{4,7},{4,8},{4,9},{4,10},{4,11},{4,12},{4,13},{4,14},{4,15},{4,16},{4,17},{4,18},{4,19},{4,20},{4,21},{4,22},
+    		{7,1},{7,2},{7,3},{7,7},{7,8},{7,9},{7,10},{7,11},{7,12},{7,13},{7,14},{7,15},{7,16},{7,17},{7,18},{7,19},{7,20},{7,21},{7,22},
+    		{9,1},{9,2},{9,3},{9,7},{9,8},{9,9},{9,10},{9,11},{9,12},{9,13},{9,14},{9,15},{9,16},{9,17},{9,18},{9,19},{9,20},{9,21},{9,22},
+    		{12,1},{12,2},{12,3},{12,4},{12,5},{12,8},{12,9},{12,10},{12,11},{12,12},{12,13},{12,14},{12,15},{12,16},{12,17},{12,18},{12,19},{12,20},{12,21},{12,22},
+    		{14,1},{14,2},{14,3},{14,4},{14,5},{14,8},{14,9},{14,10},{14,11},{14,12},{14,13},{14,14},{14,15},{14,16},{14,17},{14,18},{14,19},{14,20},{14,21},{14,22},
+    };
+    private boolean isWhiteTile_3(int x, int y) {
+    	for(int i = 0; i<whiteTiles_3.length; i++) {
+    		int whiteTileX = whiteTiles_3[i][0];
+    		int whiteTileY = whiteTiles_3[i][1];
+    		if(x== whiteTileX && y==whiteTileY) {
+    			return true;
+    		}
+    	}
+    	return false;
     }
 //    private void updateScore() {
 //        int currentScore = snakeBody.getBody().size() * scoreMultiplier;
