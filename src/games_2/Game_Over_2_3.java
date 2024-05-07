@@ -19,7 +19,7 @@ import TrangChu.Home;
 import games.Game_Over;
 import games.SnakeGame;
 
-public class Game_Over_2 extends JFrame implements ActionListener {
+public class Game_Over_2_3 extends JFrame implements ActionListener {
     private JButton new_game;
     private JButton play_again;
     private JButton exit;
@@ -27,8 +27,8 @@ public class Game_Over_2 extends JFrame implements ActionListener {
     private SnakeGame_2_2 snakeGame_2_2;
     private SnakeGame_2_3 snakeGame_2_3;
     
-    public Game_Over_2 (SnakeGame_2 snakeGame_2) throws HeadlessException {
-  	  this.snakeGame_2 = snakeGame_2;
+    public Game_Over_2_3 (SnakeGame_2_3 snakeGame_2_3) throws HeadlessException {
+  	  this.snakeGame_2_3 = snakeGame_2_3;
   	  this.init();
   	  this.setVisible(true);
     }
@@ -48,7 +48,7 @@ public class Game_Over_2 extends JFrame implements ActionListener {
   	  jPanel1.add(overLabel);
   	  
   	  JPanel scorePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-  	  Label scoreLabel = new Label("Score:"+snakeGame_2.calculateScore());
+  	  Label scoreLabel = new Label("Score:"+snakeGame_2_3.calculateScore());
   	  scoreLabel.setFont(font);
   	  scorePanel.add(scoreLabel);
   	  
@@ -130,12 +130,13 @@ public class Game_Over_2 extends JFrame implements ActionListener {
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
-				SnakeGame_2 snakGame_2 = new SnakeGame_2(600, 600);
+				SnakeGame_2_3 snakGame_2_3 = new SnakeGame_2_3(600, 600);
 			
 				//Home home = new Home();
-				Game_Over_2 game_Over = new Game_Over_2(snakGame_2);
+				Game_Over_2_3 game_Over = new Game_Over_2_3(snakGame_2_3);
 				
 			}
 		});
 	}
 }
+

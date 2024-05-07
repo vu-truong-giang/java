@@ -17,7 +17,9 @@ public class App_2 extends JFrame {
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        SnakeGame_2 snakeGame = new SnakeGame_2(boardWidth, boardHeight);
+        
+		SnakeGame_2 snakeGame = new SnakeGame_2(boardWidth, boardHeight);
+		//SnakeGame_2_2 snakeGame = new SnakeGame_2_2(boardWidth, boardHeight);
         frame.add(snakeGame);
         frame.pack();
         snakeGame.requestFocus();

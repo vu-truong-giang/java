@@ -1,7 +1,10 @@
 package Home;
 
-import javax.swing.*; 
-import games_2.*;
+import javax.swing.*;  
+import games_2.SnakeGame_2;
+import games_2.SnakeGame_2_2;
+import games_2.SnakeGame_2_3;
+
 import java.awt.*;
 import java.awt.event.*;
 
@@ -10,6 +13,8 @@ public class SnakeSettingUI extends JFrame implements ActionListener {
 	private JLabel[] mapLabels , snakeLabels , imgMapLabels , imgSnakeLabels;
 	private int currentMapIndex , currentSnakeIndex;
     private int size;
+    private JButton okButton;
+    private JComboBox<String> OptionMap;
    
 
     public SnakeSettingUI() {
@@ -117,20 +122,72 @@ public class SnakeSettingUI extends JFrame implements ActionListener {
 
 
         // OK button
-        JButton okButton = new JButton("OK");
-        okButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                // Đóng cửa sổ hiện tại
-                setVisible(false);
-                // Đóng cả cửa sổ SnakeSettingUI
-                dispose();
-            }
-        });
+//        JButton okButton = new JButton("OK");
+//        okButton.addActionListener(new ActionListener() {
+//            public void actionPerformed(ActionEvent e) {
+//            
+//                // Đóng cửa sổ hiện tại
+//                setVisible(false);
+//                // Đóng cả cửa sổ SnakeSettingUI
+//                dispose();
+//            }
+//        });
+        //JPanel jPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+ 	   
+ 	   String[] Maps = {"Map 1","Map 2","Map 3"};
+ 	   OptionMap = new JComboBox<>(Maps);
+ 	   OptionMap.addActionListener(new ActionListener() {
+		
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			String SelectOpp = (String) OptionMap.getSelectedItem();
+			if(SelectOpp.equals("Map 1")) {
+			    SnakeGame_2 snakeGame_2 = new SnakeGame_2(600, 600);
+				JFrame gameFrame = new JFrame("Snake Game 2");
+			    gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			    gameFrame.getContentPane().add(snakeGame_2);// add class snakeGame vào
+			    gameFrame.pack();
+			    gameFrame.setLocationRelativeTo(null);
+			    gameFrame.requestFocus();
+			    gameFrame.setVisible(true);
+			    pack();
+			    dispose();
+			}else if(SelectOpp.equals("Map 2")) {
+			    SnakeGame_2_2 snakeGame_2_2 = new SnakeGame_2_2(600, 600);
+				JFrame gameFrame = new JFrame("Snake Game 2");
+			    gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			    gameFrame.getContentPane().add(snakeGame_2_2);// add class snakeGame vào
+			    gameFrame.pack();
+			    gameFrame.setLocationRelativeTo(null);
+			    gameFrame.requestFocus();
+			    gameFrame.setVisible(true);
+			    pack();
+			    dispose();
+			}else if(SelectOpp.equals("Map 3")) {
+			    SnakeGame_2_3 snakeGame_2_3 = new SnakeGame_2_3(600, 600);
+				JFrame gameFrame = new JFrame("Snake Game 2");
+			    gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			    gameFrame.getContentPane().add(snakeGame_2_3);// add class snakeGame vào
+			    gameFrame.pack();
+			    gameFrame.setLocationRelativeTo(null);
+			    gameFrame.requestFocus();
+			    gameFrame.setVisible(true);
+			    pack();
+			    dispose();
+			}
+			// Đóng cửa sổ hiện tại
+             setVisible(false);
+//          // Đóng cả cửa sổ SnakeSettingUI
+             dispose();
+			
+		}
+	});
         gbc.gridx = 2;
         gbc.gridy = 3;
         gbc.gridwidth = 3;
         gbc.anchor = GridBagConstraints.CENTER;
-        add(okButton, gbc);
+        add(OptionMap, gbc);
         
         
         
@@ -194,7 +251,22 @@ public class SnakeSettingUI extends JFrame implements ActionListener {
 
 
 	public void actionPerformed(ActionEvent e) {
-          
+//		if(e.getSource()== okButton) {
+//			//if(imgMapLabels.length==0 && imgSnakeLabels.length == 0) {
+//				 SnakeGame_2 snakeGame_2 = new SnakeGame_2(600, 600);
+//					JFrame gameFrame = new JFrame("Snake Game 2");
+//				    gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//				    gameFrame.getContentPane().add(snakeGame_2);// add class snakeGame vào
+//				    gameFrame.pack();
+//				    gameFrame.setLocationRelativeTo(null);
+//				    gameFrame.requestFocus();
+//				    gameFrame.setVisible(true);
+//				    pack();
+//				    this.dispose();
+//			//}
+//		}
+		
+		
     }
 
     public static void main(String[] args) {
