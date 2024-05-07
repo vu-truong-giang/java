@@ -1,7 +1,9 @@
 package LogIn;
 import javax.swing.*;
 
+
 import TrangChu.SnakeGameGUI;
+import dao.BangNguoiDungDAO;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -12,7 +14,10 @@ public class LoginForm extends JFrame {
     private JTextField usernameField;
     private JPasswordField passwordField;
 
-    public LoginForm() {
+    
+	
+
+	public LoginForm() {
         setTitle("Đăng nhập");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(300, 150);
@@ -50,21 +55,18 @@ public class LoginForm extends JFrame {
         panel.add(passwordField, gbc);
 
         JButton loginButton = new JButton("Đăng nhập");
-        gbc.gridx = 1; // Cột 1
-        gbc.gridy = 2; // Dòng 2
-        gbc.gridwidth = 2; // Số cột chiếm dụng
-        gbc.anchor = GridBagConstraints.CENTER; // Đặt cố định vào giữa
-        panel.add(loginButton, gbc);
-
         loginButton.addActionListener(e -> {
             String username = usernameField.getText();
-            String password = new String(passwordField.getPassword());
+            char[] password = passwordField.getPassword();
 
             // Kiểm tra thông tin đăng nhập
-            if (username.equals("admin") && password.equals("123")) {
+            if (BangNguoiDungDAO.getInstance().isValidLogin(username, password)) {
                 // Đăng nhập thành công, hiển thị thông báo
                 JOptionPane.showMessageDialog(this, "Đăng nhập thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                 
+                String inputValue = usernameField.getText(); // Lấy giá trị từ JTextField
+                // Gọi phương thức trong GameUI để sử dụng giá trị này
+                SnakeGameGUI.setPlayerName(inputValue);
                 // Mở SnakeGameGUI
                 dispose(); // Đóng cửa sổ đăng nhập
                 SwingUtilities.invokeLater(() -> new SnakeGameGUI().setVisible(true));
@@ -73,13 +75,26 @@ public class LoginForm extends JFrame {
                 JOptionPane.showMessageDialog(this, "Tên đăng nhập hoặc mật khẩu không đúng!", "Lỗi Đăng Nhập", JOptionPane.ERROR_MESSAGE);
             }
         });
+        gbc.gridx = 1; // Cột 1
+        gbc.gridy = 2; // Dòng 2
+        gbc.gridwidth = 2; // Số cột chiếm dụng
+        gbc.anchor = GridBagConstraints.CENTER; // Đặt cố định vào giữa
+        panel.add(loginButton, gbc);
 
+        
 
         getContentPane().add(panel);
         setVisible(true);
     }
+	
+	
+    
+    
 
-    public static void main(String[] args) {
+    
+
+
+	public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {

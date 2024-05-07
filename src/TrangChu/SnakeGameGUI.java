@@ -2,9 +2,12 @@ package TrangChu;
 
 import javax.swing.*;
 
+import LogIn.LoginForm;
 import Sound.PlayMusicInMap;
 import Sound.playMusic;
+import dao.BangNguoiChoiDAO;
 import games.SnakeGame;
+import model.BangNguoiChoi;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -18,6 +21,13 @@ public class SnakeGameGUI extends JFrame implements ActionListener {
     private JButton leaderboardButton;
     private JButton selectMapButton;
     private playMusic musicPlayer;
+    
+    private static String playerName;
+
+    public static void setPlayerName(String name) {
+        playerName = name;
+        // Sử dụng giá trị playerName ở đây
+    }
 
     public SnakeGameGUI() {
         setTitle("Snake Game");
@@ -31,8 +41,10 @@ public class SnakeGameGUI extends JFrame implements ActionListener {
         panel.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 10, 10, 10);
-
-        playerNameLabel = new JLabel("<html><font color='blue'>Player:</font> <font color='red'>giang</font></html>");
+        
+        
+        
+        playerNameLabel = new JLabel("<html><font color='blue'>Player:</font> <font color='red'>" + BangNguoiChoiDAO.getInstance().selectByNameReturnNameuser(playerName) + "</font></html>");
         playerNameLabel.setFont(new Font("Arial", Font.BOLD, 16));
         playerNameLabel.setForeground(Color.BLUE);
         playerNameLabel.setHorizontalAlignment(SwingConstants.CENTER);
