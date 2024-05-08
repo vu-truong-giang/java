@@ -18,7 +18,7 @@ public class App_2 extends JFrame {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         
-		//SnakeGame_2 snakeGame = new SnakeGame_2(boardWidth, boardHeight);
+		//SnakeGame_2_2 snakeGame = new SnakeGame_2_2(boardWidth, boardHeight);
 		SnakeGame_2_3 snakeGame = new SnakeGame_2_3(boardWidth, boardHeight);
         frame.add(snakeGame);
         frame.pack();

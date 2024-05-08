@@ -188,7 +188,7 @@ public class SnakeSettingUI extends JFrame implements ActionListener {
 			    pack();
 			    dispose();
 			}
-			else if(SelectOpp.equals("1.2")) {
+			else if(SelectOpp.equals("Map 1.2")) {
 			    SnakeGame2 snakeGame2 = new SnakeGame2(600, 600);
 				JFrame gameFrame = new JFrame("Snake Game ");
 			    gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

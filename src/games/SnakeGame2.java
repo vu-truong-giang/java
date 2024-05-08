@@ -70,6 +70,7 @@ public class SnakeGame2 extends JPanel implements ActionListener, KeyListener {
 				level.nextLevel();
 				gameLoop.setDelay(level.getCurrentSpeed());
 				level_bt.setText("Level " + (level.getCurrentLevel()+1));
+				
 			}
 		});
         JPanel level_pn = new JPanel(new BorderLayout());
@@ -85,15 +86,14 @@ public class SnakeGame2 extends JPanel implements ActionListener, KeyListener {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				resetGame();
+				
 				newGame_bt.setVisible(false);
+				level_bt.setVisible(false);
 			}
 		});
         
 //        int currentLevel = 0;
 //        int score =0;
-        
-        
-        
         
         newGame_bt.addKeyListener(this);
         newGame_bt.setFont(new Font("UTM Micra",1,15));
@@ -190,7 +190,7 @@ public class SnakeGame2 extends JPanel implements ActionListener, KeyListener {
 	private void checkFood() {
         if (snakeHead.x == food.x && snakeHead.y == food.y) {
             snakeBody.add(new Tile(food.x, food.y));
-            food.placeFood(boardWidth, boardHeight, tileSize);
+            food.placeFood_2(boardWidth, boardHeight, tileSize, map);
         }
 		
     }

@@ -7,7 +7,7 @@ import games.Map;
 public class Food_2 {
     int x;
     int y;
-    Map map;
+    
 	public Food_2(int x, int y) {
 		this.x = x;
 		this.y = y;

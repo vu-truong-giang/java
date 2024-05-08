@@ -86,6 +86,7 @@ public class SnakeGame3 extends JPanel implements ActionListener, KeyListener {
 				// TODO Auto-generated method stub
 				resetGame();
 				newGame_bt.setVisible(false);
+				level_bt.setVisible(false);
 			}
 		});
         
@@ -190,7 +191,7 @@ public class SnakeGame3 extends JPanel implements ActionListener, KeyListener {
 	private void checkFood() {
         if (snakeHead.x == food.x && snakeHead.y == food.y) {
             snakeBody.add(new Tile(food.x, food.y));
-            food.placeFood(boardWidth, boardHeight, tileSize);
+            food.placeFood_3(boardWidth, boardHeight, tileSize, map);
         }
 		
     }

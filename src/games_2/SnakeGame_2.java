@@ -34,6 +34,7 @@ public class SnakeGame_2 extends JPanel implements ActionListener, KeyListener {
     private Map_2 map;
     private SnakeColor_2 snakeColor;
     private test test;
+    private JButton start_Button;
     
 
     public SnakeGame_2(int boardWidth, int boardHeight) {
@@ -57,7 +58,34 @@ public class SnakeGame_2 extends JPanel implements ActionListener, KeyListener {
         
 
         gameLoop = new Timer(delay, this);
-        gameLoop.start();
+        //gameLoop.start();
+        
+        start_Button = new JButton("Start");
+        start_Button.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				resetGame();
+				start_Button.setVisible(false);
+			}
+		});
+        start_Button.addKeyListener(this);
+        start_Button.setFont(new Font("UTM Micra",1,15));
+        start_Button.setBackground(Color.white);
+        add(start_Button);
+        
+        
+        
+    }
+    public void resetGame() {
+    	snakeHead = new SnakeHaed_2(5, 5);
+    	snakeBody = new SnakrBody_2();
+    	food = new Food_2(10, 10);
+    	map = new Map_2(tileSize);
+    	snakeColor = new SnakeColor_2(snakeHead, snakeBody, food, tileSize);
+    	gameOver = false;
+    	gameLoop.restart();
     }
 
     public void paintComponent(Graphics g) {
