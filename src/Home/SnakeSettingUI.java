@@ -1,6 +1,7 @@
 package Home;
 
 import javax.swing.*;  
+import games.*;
 import games_2.SnakeGame_2;
 import games_2.SnakeGame_2_2;
 import games_2.SnakeGame_2_3;
@@ -134,7 +135,7 @@ public class SnakeSettingUI extends JFrame implements ActionListener {
 //        });
         //JPanel jPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
  	   
- 	   String[] Maps = {"Map 1","Map 2","Map 3"};
+ 	   String[] Maps = {"Map 1.1","Map 1.2","Map 1.3","Map 2.1","Map 2.2","Map 2.3"};
  	   OptionMap = new JComboBox<>(Maps);
  	   OptionMap.addActionListener(new ActionListener() {
 		
@@ -142,9 +143,9 @@ public class SnakeSettingUI extends JFrame implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
 			String SelectOpp = (String) OptionMap.getSelectedItem();
-			if(SelectOpp.equals("Map 1")) {
+			if(SelectOpp.equals("Map 2.1")) {
 			    SnakeGame_2 snakeGame_2 = new SnakeGame_2(600, 600);
-				JFrame gameFrame = new JFrame("Snake Game 2");
+				JFrame gameFrame = new JFrame("Snake Game ");
 			    gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			    gameFrame.getContentPane().add(snakeGame_2);// add class snakeGame vào
 			    gameFrame.pack();
@@ -153,9 +154,9 @@ public class SnakeSettingUI extends JFrame implements ActionListener {
 			    gameFrame.setVisible(true);
 			    pack();
 			    dispose();
-			}else if(SelectOpp.equals("Map 2")) {
+			}else if(SelectOpp.equals("Map 2.2")) {
 			    SnakeGame_2_2 snakeGame_2_2 = new SnakeGame_2_2(600, 600);
-				JFrame gameFrame = new JFrame("Snake Game 2");
+				JFrame gameFrame = new JFrame("Snake Game ");
 			    gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			    gameFrame.getContentPane().add(snakeGame_2_2);// add class snakeGame vào
 			    gameFrame.pack();
@@ -164,11 +165,46 @@ public class SnakeSettingUI extends JFrame implements ActionListener {
 			    gameFrame.setVisible(true);
 			    pack();
 			    dispose();
-			}else if(SelectOpp.equals("Map 3")) {
+			}else if(SelectOpp.equals("Map 2.3")) {
 			    SnakeGame_2_3 snakeGame_2_3 = new SnakeGame_2_3(600, 600);
-				JFrame gameFrame = new JFrame("Snake Game 2");
+				JFrame gameFrame = new JFrame("Snake Game ");
 			    gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			    gameFrame.getContentPane().add(snakeGame_2_3);// add class snakeGame vào
+			    gameFrame.pack();
+			    gameFrame.setLocationRelativeTo(null);
+			    gameFrame.requestFocus();
+			    gameFrame.setVisible(true);
+			    pack();
+			    dispose();
+			}else if(SelectOpp.equals("Map 1.1")) {
+			    SnakeGame snakeGame = new SnakeGame(600, 600);
+				JFrame gameFrame = new JFrame("Snake Game ");
+			    gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			    gameFrame.getContentPane().add(snakeGame);// add class snakeGame vào
+			    gameFrame.pack();
+			    gameFrame.setLocationRelativeTo(null);
+			    gameFrame.requestFocus();
+			    gameFrame.setVisible(true);
+			    pack();
+			    dispose();
+			}
+			else if(SelectOpp.equals("1.2")) {
+			    SnakeGame2 snakeGame2 = new SnakeGame2(600, 600);
+				JFrame gameFrame = new JFrame("Snake Game ");
+			    gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			    gameFrame.getContentPane().add(snakeGame2);// add class snakeGame vào
+			    gameFrame.pack();
+			    gameFrame.setLocationRelativeTo(null);
+			    gameFrame.requestFocus();
+			    gameFrame.setVisible(true);
+			    pack();
+			    dispose();
+			}
+			else if(SelectOpp.equals("Map 1.3")) {
+			    SnakeGame3 snakeGame3 = new SnakeGame3(600, 600);
+				JFrame gameFrame = new JFrame("Snake Game ");
+			    gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			    gameFrame.getContentPane().add(snakeGame3);// add class snakeGame vào
 			    gameFrame.pack();
 			    gameFrame.setLocationRelativeTo(null);
 			    gameFrame.requestFocus();

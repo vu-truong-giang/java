@@ -20,14 +20,14 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
-public class Game_Over extends JFrame implements ActionListener {
+public class Game_Over3 extends JFrame implements ActionListener {
           private JButton new_game;
           private JButton play_again;
           private JButton exit;
-          private SnakeGame snakeGame;
+          private SnakeGame3 snakeGame3;
           
-          public Game_Over (SnakeGame snakeGame) throws HeadlessException {
-        	  this.snakeGame = snakeGame;
+          public Game_Over3 (SnakeGame3 snakeGame3) throws HeadlessException {
+        	  this.snakeGame3 = snakeGame3;
         	  this.init();
         	  this.setVisible(true);
           }
@@ -47,7 +47,7 @@ public class Game_Over extends JFrame implements ActionListener {
         	  jPanel1.add(overLabel);
         	  
         	  JPanel scorePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        	  Label scoreLabel = new Label("Score:"+snakeGame.currentScore());
+        	  Label scoreLabel = new Label("Score:"+snakeGame3.currentScore());
         	  scoreLabel.setFont(font);
         	  scorePanel.add(scoreLabel);
         	  
@@ -108,12 +108,12 @@ public class Game_Over extends JFrame implements ActionListener {
 		}
 		private void openSnakeGame() {
 	        // Tạo một đối tượng của lớp SnakeGame
-	        SnakeGame snakeGame = new SnakeGame(600, 600);
+	        SnakeGame3 snakeGame3 = new SnakeGame3(600, 600);
     
 	        // Hiển thị trò chơi
 	        JFrame gameFrame = new JFrame("Snake Game");
 	        gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	        gameFrame.getContentPane().add(snakeGame);// add class snakeGame vào
+	        gameFrame.getContentPane().add(snakeGame3);// add class snakeGame vào
 	        gameFrame.pack();
 	        gameFrame.setLocationRelativeTo(null);
 	        gameFrame.requestFocus();
@@ -129,9 +129,9 @@ public class Game_Over extends JFrame implements ActionListener {
 				@Override
 				public void run() {
 					// TODO Auto-generated method stub
-					SnakeGame snakGame = new SnakeGame(600, 600);
+					SnakeGame3 snakGame3 = new SnakeGame3(600, 600);
 					//Home home = new Home();
-					Game_Over game_Over = new Game_Over(snakGame);
+					Game_Over3 game_Over3 = new Game_Over3(snakGame3);
 				}
 			});
 		}

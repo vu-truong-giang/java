@@ -46,7 +46,7 @@ public class SnakeGame_2 extends JPanel implements ActionListener, KeyListener {
         
         
 
-        snakeHead = new SnakeHaed_2(5, 5);
+        snakeHead = new SnakeHaed_2(5,5);
         snakeBody = new SnakrBody_2();
         food = new Food_2(10, 10);
         map = new Map_2(tileSize);

@@ -1,9 +1,8 @@
 package games;
 
 import TrangChu.*;
-
-import games.SnakeGame;
 import Home.*;
+import games.SnakeGame;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -20,14 +19,14 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
-public class Game_Over extends JFrame implements ActionListener {
+public class Game_Over2 extends JFrame implements ActionListener {
           private JButton new_game;
           private JButton play_again;
           private JButton exit;
-          private SnakeGame snakeGame;
+          private SnakeGame2 snakeGame2;
           
-          public Game_Over (SnakeGame snakeGame) throws HeadlessException {
-        	  this.snakeGame = snakeGame;
+          public Game_Over2 (SnakeGame2 snakeGame2) throws HeadlessException {
+        	  this.snakeGame2 = snakeGame2;
         	  this.init();
         	  this.setVisible(true);
           }
@@ -47,7 +46,7 @@ public class Game_Over extends JFrame implements ActionListener {
         	  jPanel1.add(overLabel);
         	  
         	  JPanel scorePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        	  Label scoreLabel = new Label("Score:"+snakeGame.currentScore());
+        	  Label scoreLabel = new Label("Score:"+snakeGame2.currentScore());
         	  scoreLabel.setFont(font);
         	  scorePanel.add(scoreLabel);
         	  
@@ -108,12 +107,12 @@ public class Game_Over extends JFrame implements ActionListener {
 		}
 		private void openSnakeGame() {
 	        // Tạo một đối tượng của lớp SnakeGame
-	        SnakeGame snakeGame = new SnakeGame(600, 600);
+	        SnakeGame2 snakeGame2 = new SnakeGame2(600, 600);
     
 	        // Hiển thị trò chơi
 	        JFrame gameFrame = new JFrame("Snake Game");
 	        gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	        gameFrame.getContentPane().add(snakeGame);// add class snakeGame vào
+	        gameFrame.getContentPane().add(snakeGame2);// add class snakeGame vào
 	        gameFrame.pack();
 	        gameFrame.setLocationRelativeTo(null);
 	        gameFrame.requestFocus();

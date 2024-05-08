@@ -53,6 +53,44 @@ public class SnakeColor{
                     (ImageObserver) null);
         }
 	}
+	public void draw_2(Graphics g) {
+		try {
+			headImg = ImageIO.read(getClass().getResource("/img/head_2.png"));
+            bodyImg = ImageIO.read(getClass().getResource("/img/body_2.png"));
+            foodImg = ImageIO.read(getClass().getResource("/img/food_2.png"));
+		} catch (IOException e) {
+			// TODO: handle exception
+			System.err.println("Error loading images: " + e.getMessage());
+		}
+		g.drawImage(headImg, snakeHead.x * tileSize, snakeHead.y * tileSize, tileSize, tileSize,
+                (ImageObserver) null);
+		g.drawImage(foodImg, food.x * tileSize, food.y * tileSize, tileSize, tileSize, (ImageObserver) null);
+		
+		ArrayList<Tile> body = snakeBody.getBody();
+        for (Tile part : body) {
+            g.drawImage(bodyImg, part.x * tileSize, part.y * tileSize, tileSize, tileSize,
+                    (ImageObserver) null);
+        }
+	}
+	public void draw_3(Graphics g) {
+		try {
+			headImg = ImageIO.read(getClass().getResource("/img/head_3.png"));
+            bodyImg = ImageIO.read(getClass().getResource("/img/body_3.png"));
+            foodImg = ImageIO.read(getClass().getResource("/img/food_3.png"));
+		} catch (IOException e) {
+			// TODO: handle exception
+			System.err.println("Error loading images: " + e.getMessage());
+		}
+		g.drawImage(headImg, snakeHead.x * tileSize, snakeHead.y * tileSize, tileSize, tileSize,
+                (ImageObserver) null);
+		g.drawImage(foodImg, food.x * tileSize, food.y * tileSize, tileSize, tileSize, (ImageObserver) null);
+		
+		ArrayList<Tile> body = snakeBody.getBody();
+        for (Tile part : body) {
+            g.drawImage(bodyImg, part.x * tileSize, part.y * tileSize, tileSize, tileSize,
+                    (ImageObserver) null);
+        }
+	}
 	
 	
 	

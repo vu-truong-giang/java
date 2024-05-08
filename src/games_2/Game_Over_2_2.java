@@ -109,12 +109,12 @@ public class Game_Over_2_2 extends JFrame implements ActionListener {
 	}
 	private void openSnakeGame() {
       // Tạo một đối tượng của lớp SnakeGame
-      SnakeGame_2 snakeGame_2 = new SnakeGame_2(600, 600);
+      SnakeGame_2_2 snakeGame_2_2 = new SnakeGame_2_2(600, 600);
 
       // Hiển thị trò chơi
       JFrame gameFrame = new JFrame("Snake Game");
       gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-      gameFrame.getContentPane().add(snakeGame_2);// add class snakeGame vào
+      gameFrame.getContentPane().add(snakeGame_2_2);// add class snakeGame vào
       gameFrame.pack();
       gameFrame.setLocationRelativeTo(null);
       gameFrame.requestFocus();

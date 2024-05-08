@@ -137,11 +137,14 @@ public class SnakeGame_2_3 extends JPanel implements ActionListener, KeyListener
     
     // di chuyển
     public void moveBody() {
+    	    	
 		for(int i = snakeBody.getBody().size()-1; i>=0; i--) {
 			Tile_2 snakePart = snakeBody.getBody().get(i);
 			if(i==0) {
 				snakePart.x = snakeHead.x;
 				snakePart.y = snakeHead.y;
+			
+		    		
 			}else {
 				Tile_2 prevSnakePart = snakeBody.getBody().get(i-1);
 				snakePart.x = prevSnakePart.x;
@@ -155,6 +158,9 @@ public class SnakeGame_2_3 extends JPanel implements ActionListener, KeyListener
     }
     // va chạm
     private void checkCollision() {
+    	
+    	
+    	
         ArrayList<Tile_2> body = snakeBody.getBody();
         for (Tile_2 part : body) {
             if (part.x == snakeHead.x && part.y == snakeHead.y) {

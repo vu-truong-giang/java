@@ -37,10 +37,12 @@ public class SnakeGame_2_2 extends JPanel implements ActionListener, KeyListener
     private SnakeColor_2 snakeColor;
     private test test;
     
+    
 
     public SnakeGame_2_2(int boardWidth, int boardHeight) {
         this.boardWidth = boardWidth;
         this.boardHeight = boardHeight;
+       // this.maxXY = Math.max(boardWidth, boardHeight)/ tileSize;
         setPreferredSize(new Dimension(this.boardWidth, this.boardHeight));
         setBackground(Color.black);
         addKeyListener(this);
@@ -149,11 +151,15 @@ public class SnakeGame_2_2 extends JPanel implements ActionListener, KeyListener
 				snakePart.y = prevSnakePart.y;
 			}
 		}
+    	
 		
 	}
+    
     public boolean collision(SnakeHaed_2 snakeHead2, Food_2 food2) {
         return snakeHead2.x == food2.x && snakeHead2.y == food2.y;
     }
+    
+    
     // va chạm
     private void checkCollision() {
         ArrayList<Tile_2> body = snakeBody.getBody();
@@ -163,11 +169,15 @@ public class SnakeGame_2_2 extends JPanel implements ActionListener, KeyListener
                 return;
             }
         }
+        
+        
+        
         if(isWhiteTile_2(snakeHead.x, snakeHead.y)) {
         	map.drawMap_2(getGraphics(), 600, 600);
         	gameOver = true;
         	return;
         }
+        
         
     }
     // chạm chướng ngại vật bản đồ 2
