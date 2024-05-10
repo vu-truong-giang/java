@@ -1,6 +1,9 @@
 package TrangChu;
 
 import javax.swing.*;
+
+import dao.BangTrangThaiGameDAO;
+
 import java.awt.*;
 import java.awt.event.*;
 
@@ -9,13 +12,20 @@ public class SnakeSettingUI extends JFrame implements ActionListener {
 	private JLabel[] mapLabels , snakeLabels , imgMapLabels , imgSnakeLabels;
 	private int currentMapIndex , currentSnakeIndex;
     private int size;
-   
+    
+    private static String playerName;
+
+    public static void setPlayerName(String name) {
+        playerName = name;
+    }
 
     public SnakeSettingUI() {
         setTitle("Snake Settings");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(300, 150);
         setLocationRelativeTo(null);
+        
+        
 
         // Map selection
         setLayout(new GridBagLayout());
@@ -39,7 +49,7 @@ public class SnakeSettingUI extends JFrame implements ActionListener {
         for (int i=0 ; i < mapLabels.length ; i++) {
         	mapLabels[i] = new JLabel("Map" + i);
         }
-        currentMapIndex = 0;
+        currentMapIndex = BangTrangThaiGameDAO.getInstance().getValueMap(playerName) ;
         
         JLabel mapLabel = mapLabels[currentMapIndex];
         gbc.gridx = 1;
@@ -80,7 +90,7 @@ public class SnakeSettingUI extends JFrame implements ActionListener {
         	snakeLabels[i] = new JLabel("Snake " + i);
         }
         
-        currentSnakeIndex = 0 ;
+        currentSnakeIndex = BangTrangThaiGameDAO.getInstance().getValueSnake(playerName) ;
         
         JLabel snakeLabel = snakeLabels[currentSnakeIndex];
         gbc.gridx = 5;
@@ -120,6 +130,7 @@ public class SnakeSettingUI extends JFrame implements ActionListener {
         okButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 // Đóng cửa sổ hiện tại
+            	BangTrangThaiGameDAO.getInstance().updateSnakeSetting(playerName, currentMapIndex, currentSnakeIndex);
                 setVisible(false);
                 // Đóng cả cửa sổ SnakeSettingUI
                 dispose();

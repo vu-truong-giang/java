@@ -2,8 +2,10 @@ package TrangChu;
 
 import javax.swing.*;
 
+
+
 import LogIn.LoginForm;
-import Sound.PlayMusicInMap;
+import Sound.PlayMusic;
 import Sound.playMusic;
 import dao.BangNguoiChoiDAO;
 import games.SnakeGame;
@@ -11,8 +13,7 @@ import model.BangNguoiChoi;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.util.ArrayList;
-import java.util.List;
+
 
 public class SnakeGameGUI extends JFrame implements ActionListener {
     private JButton playButton;
@@ -20,13 +21,12 @@ public class SnakeGameGUI extends JFrame implements ActionListener {
     private JButton soundButton;
     private JButton leaderboardButton;
     private JButton selectMapButton;
-    private playMusic musicPlayer;
+
     
     private static String playerName;
 
     public static void setPlayerName(String name) {
         playerName = name;
-        // Sử dụng giá trị playerName ở đây
     }
 
     public SnakeGameGUI() {
@@ -42,7 +42,7 @@ public class SnakeGameGUI extends JFrame implements ActionListener {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 10, 10, 10);
         
-        
+        System.out.println(playerName);
         
         playerNameLabel = new JLabel("<html><font color='blue'>Player:</font> <font color='red'>" + BangNguoiChoiDAO.getInstance().selectByNameReturnNameuser(playerName) + "</font></html>");
         playerNameLabel.setFont(new Font("Arial", Font.BOLD, 16));
@@ -81,12 +81,22 @@ public class SnakeGameGUI extends JFrame implements ActionListener {
 
         soundButton = new JButton("Sound");
         soundButton.addActionListener(e -> {
-            SwingUtilities.invokeLater(() -> new VolumeSliderUI().setVisible(true));
+            SwingUtilities.invokeLater(() -> new Slider());
         });
         gbc.gridx = 2;
         gbc.gridy = 3;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         panel.add(soundButton, gbc);
+        
+        Thread soundThread = new Thread(() -> {
+            try {
+                PlayMusic.playMusic();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }    
+        });
+
+        soundThread.start();
 
         add(panel);
         pack();
@@ -123,20 +133,8 @@ public class SnakeGameGUI extends JFrame implements ActionListener {
 
     public static void main(String[] args) {
     	
-    	
-      
-        // Tạo một luồng mới cho âm thanh
-        Thread soundThread = new Thread(() -> {
-            try {
-                playMusic.run();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }    
-        });
+        
 
-        soundThread.start();
-
-        // Tạo và hiển thị giao diện trực tiếp trong luồng chính
         SwingUtilities.invokeLater(() -> {
             SnakeGameGUI gui = new SnakeGameGUI();
             gui.setVisible(true);

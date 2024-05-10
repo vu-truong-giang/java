@@ -1,7 +1,11 @@
 package LogIn;
 import javax.swing.*;
 
-
+import Sound.PlayMusic;
+import Sound.Sound;
+import TrangChu.SnakeSettingUI;
+import TrangChu.VolumeSliderUI;
+import TrangChu.Slider;
 import TrangChu.SnakeGameGUI;
 import dao.BangNguoiDungDAO;
 
@@ -67,6 +71,10 @@ public class LoginForm extends JFrame {
                 String inputValue = usernameField.getText(); // Lấy giá trị từ JTextField
                 // Gọi phương thức trong GameUI để sử dụng giá trị này
                 SnakeGameGUI.setPlayerName(inputValue);
+                VolumeSliderUI.setPlayerName(inputValue);
+                SnakeSettingUI.setPlayerName(inputValue);
+                Slider.setPlayerName(inputValue);
+                PlayMusic.setPlayerName(inputValue);
                 // Mở SnakeGameGUI
                 dispose(); // Đóng cửa sổ đăng nhập
                 SwingUtilities.invokeLater(() -> new SnakeGameGUI().setVisible(true));

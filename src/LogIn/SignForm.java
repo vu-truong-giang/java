@@ -119,7 +119,7 @@ public class SignForm extends JFrame {
                 	BangNguoiChoi bangnguoichoi = new BangNguoiChoi(randomString , name , randomString ,randomString ,0);
                 	BangNguoiChoiDAO.getInstance().insert(bangnguoichoi);
                 	
-                	BangTrangThaiGame bangtrangthaigame = new BangTrangThaiGame(randomString , 1, 1, 50 , 50);
+                	BangTrangThaiGame bangtrangthaigame = new BangTrangThaiGame(randomString , 1, 1, 0 , 0);
                 	BangTrangThaiGameDAO.getInstance().insert(bangtrangthaigame);
                 	
                     JOptionPane.showMessageDialog(null, "Tài khoản đã được đăng ký thành công!");

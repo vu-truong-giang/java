@@ -85,7 +85,7 @@ public class BangNguoiChoiDAO implements DAOInterface<BangNguoiChoi>{
 	        
 	        // Đóng kết nối và tài nguyên
 	        JDBCUtil.closeResultSet(rs);
-	        JDBCUtil.closePreparedStatement(ps)
+	        JDBCUtil.closePreparedStatement(ps);
 	        JDBCUtil.closeConnection(con);
 	    } catch (SQLException e) {
 	        e.printStackTrace();
