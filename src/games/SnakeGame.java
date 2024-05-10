@@ -19,8 +19,11 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener {
     int tileSize = 25;
     private Timer gameLoop;
     private boolean gameOver;
-    int levelScore[] = {1,2,3,4,5};
+    int levelScore[] = {1,2,3,4,5,6,7,8,9,10};
+    int levelMultiplier =0;
     int speed[] = {500,450,400,350,300,250,200,150,100,50};
+    //private int score = 0;
+    private Level level;
     private JComboBox lv = new JComboBox();
     private JButton newGame_bt;
     private Game_Over game_Over;
@@ -29,6 +32,7 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener {
     private Image bodyImg;
     private Map map;
     private SnakeColor snakeColor;
+    
 
     //snake
     private JPanel pn;
@@ -67,9 +71,13 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
+				
 				level.nextLevel();
+				
 				gameLoop.setDelay(level.getCurrentSpeed());
+
 				level_bt.setText("Level " + (level.getCurrentLevel()+1));
+				
 			}
 		});
         JPanel level_pn = new JPanel(new BorderLayout());
@@ -108,33 +116,15 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener {
        
 	}	
     
-	//int[] soreMu = {1,2,3,4,5};
-    int currentLevel = 1;
-    int currentScore =0;
+//	int[] soreMu = {1,2,3,4,5,6,7,8,9,10};
+//    int currentLevel = 1;
+//    int currentScore =0;
+//    
+//    int scoreMu = levelScore[currentLevel];
     
-    int scoreMu = levelScore[currentLevel];
     
     
-    
-    public int currentScore () {
-    	int baseScore = snakeBody.getBody().size();
-//    	int scoreMu = levelScore[currentLevel];
-//    	
-//		return (int)(baseScore*scoreMu);
-    	int scoreMu = 1;
-    	if(currentLevel==1) {
-    		scoreMu = 1;
-    	}else if(currentLevel == 2) {
-    		scoreMu = 2;
-    	}else if(currentLevel == 3) {
-    		scoreMu = 3;
-    	}else if(currentLevel == 4) {
-    		scoreMu = 4;
-    	}else if(currentLevel == 5) {
-    		scoreMu = 5;
-    	}
-    	return(int) baseScore * scoreMu;
-    }
+   
     
     private void resetGame() {
     	snakeHead = new SnakeHead(5, 5);
@@ -180,6 +170,18 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener {
             
         }
 	}
+	  int currentScore () {
+
+		     Level level = new Level(speed);
+		    levelMultiplier = levelScore[level.getCurrentLevel()];
+		    int baseScore = snakeBody.getBody().size();
+		    
+		    // Tính điểm dựa trên hệ số của level
+		    int score = baseScore * levelMultiplier;
+		    return score;
+	    	
+	    	
+	    }
 	
 
 //	

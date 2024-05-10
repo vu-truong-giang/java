@@ -13,18 +13,12 @@ public class App extends JFrame {
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        SnakeGame3 snakeGame = new SnakeGame3(boardWidth, boardHeight);
+        SnakeGame snakeGame = new SnakeGame(boardWidth, boardHeight);
         frame.add(snakeGame);
         frame.pack();
         snakeGame.requestFocus();
         
-//          
-//          Map map = new Map(boardWidth, boardHeight);
-//          frame.add(map);
-//          frame.pack();
-//        new snakeGameee();
-//        frame.add(snakeGameee);
-//        frame.pack();
+        
         
     }
 }

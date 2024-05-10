@@ -1,11 +1,12 @@
 package games;
 
 
-public class SnakeHead {
+public class SnakeHead  {
 	int x;
 	int y;
 	int velocityX;
 	int velocityY;
+	
 	public SnakeHead(int x, int y) {
 		
 		this.x = x;
@@ -16,6 +17,8 @@ public class SnakeHead {
 	void move() {
 		x += velocityX;
 		y += velocityY;
+		
+		
 	}
 	
 
