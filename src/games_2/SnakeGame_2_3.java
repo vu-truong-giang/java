@@ -169,12 +169,35 @@ public class SnakeGame_2_3 extends JPanel implements ActionListener, KeyListener
 			if(i==0) {
 				snakePart.x = snakeHead.x;
 				snakePart.y = snakeHead.y;
+
+				if(snakeHead.x < 0) {
+					snakeHead.x = boardWidth/tileSize - 1;
+				}else if(snakeHead.x == boardWidth/tileSize) {
+					snakeHead.x = 0;
+				}
+				if(snakeHead.y < 0) {
+					snakeHead.y = boardHeight/tileSize -1;
+				}else if(snakeHead.y == boardHeight/tileSize) {
+					snakeHead.y = 0;
+				}	
+				
 			
 		    		
 			}else {
 				Tile_2 prevSnakePart = snakeBody.getBody().get(i-1);
 				snakePart.x = prevSnakePart.x;
 				snakePart.y = prevSnakePart.y;
+				
+				if(snakePart.x < 0) {
+					snakePart.x = boardWidth/tileSize - 1;
+				}else if(snakePart.x >= boardWidth/tileSize) {
+					snakePart.x = 0;
+				}
+				if(snakePart.y < 0) {
+					snakePart.y = boardHeight/tileSize -1;
+				}else if(snakePart.y >= boardHeight/tileSize) {
+					snakePart.y = 0;
+				}
 			}
 		}
 		
