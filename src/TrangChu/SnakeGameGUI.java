@@ -3,16 +3,15 @@ package TrangChu;
 import javax.swing.*;
 
 
-
 import LogIn.LoginForm;
 import Sound.PlayMusic;
-import Sound.playMusic;
 import dao.BangNguoiChoiDAO;
-import games.SnakeGame;
 import model.BangNguoiChoi;
+import ran.snakeGame;
 
 import java.awt.*;
 import java.awt.event.*;
+
 
 
 public class SnakeGameGUI extends JFrame implements ActionListener {
@@ -53,7 +52,9 @@ public class SnakeGameGUI extends JFrame implements ActionListener {
         panel.add(playerNameLabel, gbc);
 
         playButton = new JButton("Play New Game");
-        playButton.addActionListener(this);
+        playButton.addActionListener(e -> {
+            SwingUtilities.invokeLater(() -> new snakeGame("CodeLearn.io - Game Rắn Săn Mồi", 4));
+        });
         gbc.gridx = 0;
         gbc.gridy = 2;
         gbc.gridwidth = 4;
@@ -62,7 +63,9 @@ public class SnakeGameGUI extends JFrame implements ActionListener {
         panel.add(playButton, gbc);
 
         leaderboardButton = new JButton("Leaderboard");
-        leaderboardButton.addActionListener(this);
+        leaderboardButton.addActionListener(e -> {
+            SwingUtilities.invokeLater(() -> new RankFrame());
+        });
         gbc.gridx = 0;
         gbc.gridy = 3;
         gbc.gridwidth = 1;
@@ -108,17 +111,17 @@ public class SnakeGameGUI extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == playButton) {
             // Create a new JFrame for the game window
-            JFrame gameWindow = new JFrame("Snake Game");
-            gameWindow.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // Dispose the window when closed
-
-            // Create an instance of SnakeGame and add it to the game window
-            SnakeGame snakeGame = new SnakeGame(600, 600); // Adjust the dimensions as needed
-            gameWindow.add(snakeGame);
-
-            // Pack and display the game window
-            gameWindow.pack();
-            gameWindow.setLocationRelativeTo(null);
-            gameWindow.setVisible(true);
+//            JFrame gameWindow = new JFrame("Snake Game");
+//            gameWindow.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // Dispose the window when closed
+//
+//            // Create an instance of SnakeGame and add it to the game window
+//            SnakeGame snakeGame = new SnakeGame(600, 600); // Adjust the dimensions as needed
+//            gameWindow.add(snakeGame);
+//
+//            // Pack and display the game window
+//            gameWindow.pack();
+//            gameWindow.setLocationRelativeTo(null);
+//            gameWindow.setVisible(true);
         } else if (e.getSource() == soundButton) {
             // Handle sound button action
         } else if (e.getSource() == leaderboardButton) {

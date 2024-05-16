@@ -1,6 +1,7 @@
 package TrangChu;
 
 import javax.swing.*;
+
 import LogIn.LoginForm;
 import Sound.PlayMusic;
 import Sound.Sound;
@@ -56,7 +57,6 @@ public class VolumeSliderUI extends JFrame implements ActionListener {
                 // Cập nhật giá trị của JLabel
                 volumeLabelMusic.setText("Music Volume: " + newValue); // Sửa thành volumeLabelMusic
                 
-                Sound.getNum(newValue);
                 
                 // Lưu giá trị mới vào CSDL
                 BangTrangThaiGameDAO.getInstance().updateMusicToDatabase(playerName, newValue);
@@ -130,6 +130,12 @@ public class VolumeSliderUI extends JFrame implements ActionListener {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> new VolumeSliderUI());
     }
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
 
 	
 }

@@ -6,6 +6,7 @@ import dao.BangTrangThaiGameDAO;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.net.URL;
 
 public class SnakeSettingUI extends JFrame implements ActionListener {
    
@@ -43,7 +44,8 @@ public class SnakeSettingUI extends JFrame implements ActionListener {
         Image scaledImageRight = iconRight.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
         // Create a new ImageIcon with the scaled image
         ImageIcon scaledIconRight = new ImageIcon(scaledImageRight);
-
+        
+      
         // Tạo label cho map
         mapLabels = new JLabel[4];
         for (int i=0 ; i < mapLabels.length ; i++) {
@@ -67,11 +69,13 @@ public class SnakeSettingUI extends JFrame implements ActionListener {
         gbc.gridy = 0;
         add(rightMapBtn , gbc);
         
+        //map//
+        
         imgMapLabels = new JLabel[4];
-        for ( int i= 0 ; i < imgMapLabels.length ; i++) {
-        	imgMapLabels[i] = new JLabel();
-        	imgMapLabels[i].setIcon(new ImageIcon(Toolkit.getDefaultToolkit().createImage(SnakeSettingUI.class.getResource("img"+i+".jpg"))));
-        }
+        for (int i = 0; i < imgMapLabels.length; i++) {
+            imgMapLabels[i] = new JLabel();
+            updateImageIcon(i);
+        }	
         
         size = 200;
         
@@ -112,7 +116,7 @@ public class SnakeSettingUI extends JFrame implements ActionListener {
         imgSnakeLabels = new JLabel[4];
         for ( int i= 0 ; i < imgSnakeLabels.length ; i++) {
         	imgSnakeLabels[i] = new JLabel();
-        	imgSnakeLabels[i].setIcon(new ImageIcon(Toolkit.getDefaultToolkit().createImage(SnakeSettingUI.class.getResource("img"+i+".jpg"))));
+        	imgSnakeLabels[i].setIcon(new ImageIcon(Toolkit.getDefaultToolkit().createImage(SnakeSettingUI.class.getResource("map"+i+".png"))));
         }
         
         JLabel imgSnakeLabel = imgSnakeLabels[currentSnakeIndex];
@@ -130,7 +134,7 @@ public class SnakeSettingUI extends JFrame implements ActionListener {
         okButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 // Đóng cửa sổ hiện tại
-            	BangTrangThaiGameDAO.getInstance().updateSnakeSetting(playerName, currentMapIndex, currentSnakeIndex);
+            	BangTrangThaiGameDAO.getInstance().updateMapToDatabase(playerName, currentMapIndex);
                 setVisible(false);
                 // Đóng cả cửa sổ SnakeSettingUI
                 dispose();
@@ -144,30 +148,44 @@ public class SnakeSettingUI extends JFrame implements ActionListener {
         
         
         
-        leftMapBtn.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                currentMapIndex = (currentMapIndex - 1 + mapLabels.length) % mapLabels.length; // Chuyển sang mapLabel mới
-                mapLabel.setText("Map " + currentMapIndex); // Thay đổi văn bản của mapLabel
-                updateMapLabels();
-            }
-
-			private void updateMapLabels() {
-				mapLabel.setText("Map " + currentMapIndex); // Cập nhật văn bản của mapLabel
-	            imgMapLabel.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().createImage(SnakeSettingUI.class.getResource("img" + currentMapIndex + ".jpg")))); // Cập nh
-			}
-        });
+//        leftMapBtn.addActionListener(new ActionListener() {
+//            public void actionPerformed(ActionEvent e) {
+//                currentMapIndex = (currentMapIndex - 1 + mapLabels.length) % mapLabels.length; // Chuyển sang mapLabel mới
+//                mapLabel.setText("Map " + currentMapIndex); // Thay đổi văn bản của mapLabel
+//                updateMapLabels();
+//            }
+//
+//			private void updateMapLabels() {
+//				mapLabel.setText("Map " + currentMapIndex); // Cập nhật văn bản của mapLabel
+//	            imgMapLabel.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().createImage(SnakeSettingUI.class.getResource("map" + currentMapIndex + ".png"))));
+//
+//			}
+//        });
         
         rightMapBtn.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
-                currentMapIndex = (currentMapIndex + 1) % mapLabels.length; // Chuyển sang mapLabel mới
-                updateMapLabels();
-            }
-            
-            private void updateMapLabels() {
-            	mapLabel.setText("Map " + currentMapIndex);
-            	imgMapLabel.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().createImage(SnakeSettingUI.class.getResource("img" + currentMapIndex + ".jpg"))));
+                changeMap(1, mapLabel, imgMapLabel, gbc);
             }
         });
+        leftMapBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                changeMap(-1, mapLabel, imgMapLabel, gbc);
+            }
+        });
+//        rightMapBtn.addActionListener(new ActionListener() {
+//            public void actionPerformed(ActionEvent e) {
+//                currentMapIndex = (currentMapIndex + 1) % mapLabels.length; // Chuyển sang mapLabel mới
+//                updateMapLabels();
+//            }
+//            
+//            private void updateMapLabels() {
+//            	mapLabel.setText("Map " + currentMapIndex);
+//            	imgMapLabel.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().createImage(SnakeSettingUI.class.getResource("map" + currentMapIndex + ".png"))));
+//            	
+//            }
+//        });
         
         rightSnakeBtn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -177,7 +195,7 @@ public class SnakeSettingUI extends JFrame implements ActionListener {
             
             private void updateSnakeLabels() {
             	snakeLabel.setText("Snake " + currentSnakeIndex);
-            	imgSnakeLabel.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().createImage(SnakeSettingUI.class.getResource("img" + currentSnakeIndex + ".jpg"))));
+            	imgSnakeLabel.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().createImage(SnakeSettingUI.class.getResource("map" + currentSnakeIndex + ".png"))));
             }
         });
         
@@ -189,7 +207,7 @@ public class SnakeSettingUI extends JFrame implements ActionListener {
             
             private void updateSnakeLabels() {
             	snakeLabel.setText("Snake " + currentSnakeIndex);
-            	imgSnakeLabel.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().createImage(SnakeSettingUI.class.getResource("img" + currentSnakeIndex + ".jpg"))));
+            	imgSnakeLabel.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().createImage(SnakeSettingUI.class.getResource("map" + currentSnakeIndex + ".png"))));
             }
         });
         
@@ -197,7 +215,25 @@ public class SnakeSettingUI extends JFrame implements ActionListener {
         setVisible(true);
         pack();
     }
-
+    
+   
+    private void updateImageIcon(int index) {
+        URL imageURL = SnakeSettingUI.class.getResource("map" + index + ".png");
+        ImageIcon icon = new ImageIcon(imageURL);
+        Image image = icon.getImage().getScaledInstance(200, 200, Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon = new ImageIcon(image);
+        imgMapLabels[index].setIcon(scaledIcon);
+    }
+    
+    private void changeMap(int direction, JLabel mapLabel, JLabel imgMapLabel, GridBagConstraints gbc) {
+        currentMapIndex = (currentMapIndex + direction + mapLabels.length) % mapLabels.length;
+        mapLabel.setText(mapLabels[currentMapIndex].getText());
+        updateImageIcon(currentMapIndex);
+        imgMapLabel.setIcon(imgMapLabels[currentMapIndex].getIcon());
+        imgMapLabel.setPreferredSize(new Dimension(size, size));
+        revalidate();
+        repaint();
+    }
 
    
 

@@ -5,9 +5,11 @@ import Sound.PlayMusic;
 import Sound.Sound;
 import TrangChu.SnakeSettingUI;
 import TrangChu.VolumeSliderUI;
+import TrangChu.RankFrame;
 import TrangChu.Slider;
 import TrangChu.SnakeGameGUI;
 import dao.BangNguoiDungDAO;
+import ran.snakeGame;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -75,6 +77,8 @@ public class LoginForm extends JFrame {
                 SnakeSettingUI.setPlayerName(inputValue);
                 Slider.setPlayerName(inputValue);
                 PlayMusic.setPlayerName(inputValue);
+                RankFrame.setPlayerName(inputValue);
+                snakeGame.setPlayerName(inputValue);
                 // Mở SnakeGameGUI
                 dispose(); // Đóng cửa sổ đăng nhập
                 SwingUtilities.invokeLater(() -> new SnakeGameGUI().setVisible(true));

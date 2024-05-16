@@ -74,20 +74,21 @@ public class BangTrangThaiGameDAO implements DAOInterface<BangTrangThaiGame>{
 		return 0;
 	}
 	
+	
+	
 	public void updateMusicToDatabase(String nameuser, float currentVolume) {
 	    try {
 	        Connection con = JDBCUtil.getConnection();
 	        
 	        PreparedStatement ps = con.prepareStatement("UPDATE BangTrangThaiGame "
-	                + "SET Nhac = ? "
+	                + "SET Nhac = "+currentVolume+" "
 	                + "WHERE Id_TrangThaiGame IN ("
 	                + "    SELECT BangNguoiChoi.Id_TrangThaiGame "
 	                + "    FROM BangNguoiChoi "
 	                + "    JOIN BangNguoiDung ON BangNguoiDung.Id_NguoiDung = BangNguoiChoi.Id_NguoiDung "
-	                + "    WHERE BangNguoiDung.TenDangNhap = ?)");
+	                + "    WHERE BangNguoiDung.TenDangNhap = N'"+nameuser+"')");
 	        
-	        ps.setFloat(1, currentVolume); // Thiết lập giá trị cho tham số ?
-	        ps.setString(2, nameuser); // Thiết lập giá trị cho tham số ?
+	     
 	        
 	        int rowsAffected = ps.executeUpdate(); // Thực thi câu lệnh và lấy số hàng bị ảnh hưởng
 	        
@@ -129,30 +130,54 @@ public class BangTrangThaiGameDAO implements DAOInterface<BangTrangThaiGame>{
 	        e.printStackTrace();
 	    }
 	}
+	
+	
+	public void updateMapToDatabase(String nameuser , int map) {
+		try {
+			Connection con = JDBCUtil.getConnection();
+			
+			PreparedStatement ps = con.prepareStatement("UPDATE BangTrangThaiGame "
+	                + "SET Map = "+map+" "
+	                + "WHERE Id_TrangThaiGame IN ("
+	                + "    SELECT BangNguoiChoi.Id_TrangThaiGame "
+	                + "    FROM BangNguoiChoi "
+	                + "    JOIN BangNguoiDung ON BangNguoiDung.Id_NguoiDung = BangNguoiChoi.Id_NguoiDung "
+	                + "    WHERE BangNguoiDung.TenDangNhap = N'"+nameuser+"')");
+			
+			System.out.println("update");
+	        int rowsAffected = ps.executeUpdate(); // Thực thi câu lệnh và lấy số hàng bị ảnh hưởng
+	        System.out.println("Number of rows affected: " + rowsAffected); // In số hàng bị ảnh hưởng
+
+	        JDBCUtil.closePreparedStatement(ps);
+			JDBCUtil.closeConnection(con);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 
 
 	
-	public void updateSnakeSetting(String nameuser, int map, int snake) {
+	public void updateSnakeSetting(String nameuser,  int snake) {
 		try {
 		    Connection con = JDBCUtil.getConnection();
 		    
 		    PreparedStatement ps = con.prepareStatement("UPDATE BangTrangThaiGame "
-		    		                                  + "SET Map = ? , Ran = ? "
-		    		                                  + "WHERE Id_TrangThaiGame IN ("
-		    		                                         + "SELECT BangNguoiChoi.Id_TrangThaiGame "
-		    		                                         + "FROM BangNguoIChoi "
-		    		                                         + "JOIN BangNguoiDung ON BangNguoiDung.Id_NguoiDung = BangNguoiChoi.Id_NguoiDung "
-		    		                                         + "WHERE BangNguoiDung.TenDangNhap = N'?'");
-		    ps.setInt(1, map); 
-		    ps.setInt(2, snake);
-		    ps.setString(3, nameuser); 
-		    ps.executeUpdate();
-		    
+	                + "SET Map = "+snake+" "
+	                + "WHERE Id_TrangThaiGame IN ("
+	                + "    SELECT BangNguoiChoi.Id_TrangThaiGame "
+	                + "    FROM BangNguoiChoi "
+	                + "    JOIN BangNguoiDung ON BangNguoiDung.Id_NguoiDung = BangNguoiChoi.Id_NguoiDung "
+	                + "    WHERE BangNguoiDung.TenDangNhap = N'"+nameuser+"')");
+			
+			System.out.println("update");
+	        int rowsAffected = ps.executeUpdate(); // Thực thi câu lệnh và lấy số hàng bị ảnh hưởng
+	        System.out.println("Number of rows affected: " + rowsAffected); // In số hàng bị ảnh hưởng
+
 		    JDBCUtil.closePreparedStatement(ps);
 		    JDBCUtil.closeConnection(con);
 		    
-		    System.out.println("update");
 		} catch (SQLException e) {
 		    e.printStackTrace();
 		}
@@ -259,11 +284,13 @@ public class BangTrangThaiGameDAO implements DAOInterface<BangTrangThaiGame>{
 	    try {
 	        Connection con = JDBCUtil.getConnection();
 	        
-	        PreparedStatement ps = con.prepareStatement("SELECT Map FROM BangTrangThaiGame g "
-	                                                     + "JOIN BangNguoiChoi c ON c.Id_TrangThaiGame = g.Id_TrangThaiGame "
-	                                                     + "JOIN BangNguoidung d ON d.Id_NguoiDung = c.Id_NguoiDung "
-	                                                     + "WHERE g.Id_TrangThaiGame = ?");
-	        ps.setString(1, nameuser);
+	        PreparedStatement ps = con.prepareStatement("SELECT Map FROM BangTrangThaiGame "
+                    + "JOIN BangNguoiChoi ON BangNguoiChoi.Id_TrangThaiGame = BangTrangThaiGame.Id_TrangThaiGame\r\n"
+                    + ""
+                    + "JOIN BangNguoiDung ON BangNguoiDung.Id_NguoiDung = BangNguoiChoi.Id_NguoiDung\r\n"
+                    + ""
+                    + "WHERE BangNguoiDung.TenDangNhap = N'"+nameuser+"'");
+	        
 	        ResultSet rs = ps.executeQuery();
 	        if (rs.next()) {
 	            result = rs.getInt("Map"); // Sử dụng getInt() để lấy giá trị từ cột Nhac
@@ -284,11 +311,13 @@ public class BangTrangThaiGameDAO implements DAOInterface<BangTrangThaiGame>{
 	    try {
 	        Connection con = JDBCUtil.getConnection();
 	        
-	        PreparedStatement ps = con.prepareStatement("SELECT Ran FROM BangTrangThaiGame g "
-	                                                     + "JOIN BangNguoiChoi c ON c.Id_TrangThaiGame = g.Id_TrangThaiGame "
-	                                                     + "JOIN BangNguoidung d ON d.Id_NguoiDung = c.Id_NguoiDung "
-	                                                     + "WHERE g.Id_TrangThaiGame = ?");
-	        ps.setString(1, nameuser);
+	        PreparedStatement ps = con.prepareStatement("SELECT Ran FROM BangTrangThaiGame "
+                    + "JOIN BangNguoiChoi ON BangNguoiChoi.Id_TrangThaiGame = BangTrangThaiGame.Id_TrangThaiGame\r\n"
+                    + ""
+                    + "JOIN BangNguoiDung ON BangNguoiDung.Id_NguoiDung = BangNguoiChoi.Id_NguoiDung\r\n"
+                    + ""
+                    + "WHERE BangNguoiDung.TenDangNhap = N'"+nameuser+"'");
+	        
 	        ResultSet rs = ps.executeQuery();
 	        if (rs.next()) {
 	            result = rs.getInt("Ran"); // Sử dụng getInt() để lấy giá trị từ cột Nhac
