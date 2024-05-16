@@ -4,7 +4,6 @@ import javax.swing.*;
 import Sound.PlayMusic;
 import Sound.Sound;
 import TrangChu.SnakeSettingUI;
-import TrangChu.VolumeSliderUI;
 import TrangChu.RankFrame;
 import TrangChu.Slider;
 import TrangChu.SnakeGameGUI;
@@ -73,7 +72,7 @@ public class LoginForm extends JFrame {
                 String inputValue = usernameField.getText(); // Lấy giá trị từ JTextField
                 // Gọi phương thức trong GameUI để sử dụng giá trị này
                 SnakeGameGUI.setPlayerName(inputValue);
-                VolumeSliderUI.setPlayerName(inputValue);
+//                VolumeSliderUI.setPlayerName(inputValue);
                 SnakeSettingUI.setPlayerName(inputValue);
                 Slider.setPlayerName(inputValue);
                 PlayMusic.setPlayerName(inputValue);

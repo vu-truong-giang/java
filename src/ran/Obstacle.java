@@ -27,11 +27,26 @@ public class Obstacle {
 
     public void createObstacle2() {
         // Create another pattern of obstacles (example: diagonal line)
-        for (int i = 5; i < 20; i++) {
-            for (int j = 1; j < i; j++) {
-                addObstacle(j, i);
-            }
+        for( int i= 0 ; i < 10; i++) {
+            addObstacle(i , 7);
         }
+        for(int i = 1 ; i < 15 ; i++) {
+            addObstacle(i , 20);
+
+        }
+        for ( int i = 0 ; i < 8 ; i++) {
+            addObstacle(12 , i);
+
+        }
+        
+        for( int i= 0 ; i < 22; i++) {
+            addObstacle(17 , i);
+        }
+        addObstacle(24 , 0);
+        addObstacle(23 , 0);
+        addObstacle( 0,24);
+        addObstacle(0,23);
+
     }
     
     public void createObstacle0() {
